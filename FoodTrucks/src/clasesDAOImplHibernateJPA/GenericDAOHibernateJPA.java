@@ -1,9 +1,9 @@
-package implementacionDAO;
+package clasesDAOImplHibernateJPA;
 import java.io.Serializable;
 
 import clasesDAO.GenericDAO;
 
-public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
+public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 
 	@Override
 	public T actualizar(T entity) {

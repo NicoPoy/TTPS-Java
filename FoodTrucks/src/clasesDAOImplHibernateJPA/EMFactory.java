@@ -1,4 +1,4 @@
-package implementacionDAO;
+package clasesDAOImplHibernateJPA;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

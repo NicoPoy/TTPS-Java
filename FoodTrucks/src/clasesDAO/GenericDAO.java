@@ -1,6 +1,5 @@
 package clasesDAO;
 import java.io.Serializable;
-import java.util.List;
 
 public interface GenericDAO<T> {
 	
@@ -12,3 +11,4 @@ public interface GenericDAO<T> {
 	 public T recuperar(Serializable id);
 
 }
+

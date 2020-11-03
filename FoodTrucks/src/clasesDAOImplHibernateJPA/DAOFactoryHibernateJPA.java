@@ -1,10 +1,13 @@
-package implementacionDAO;
+package clasesDAOImplHibernateJPA;
+
+import clasesDAO.DAOFactory;
 import clasesDAO.FoodTruckerDAO;
 
-public class DAOFactory {
+public class DAOFactoryHibernateJPA implements DAOFactory{
 
 	 public static FoodTruckerDAO getPersonaDAO() {
 		 return new FoodTruckerDAOHibernateJPA();
 	}
+	
 	
 }

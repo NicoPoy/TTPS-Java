@@ -1,7 +1,5 @@
-package implementacionDAO;
+package clasesDAOImplHibernateJPA;
 
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import clasesDAO.FoodTruckerDAO;
 import modelos.FoodTrucker;
 
