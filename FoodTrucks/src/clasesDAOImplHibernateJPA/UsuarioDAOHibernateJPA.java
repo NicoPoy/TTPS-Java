@@ -24,7 +24,6 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		 Usuario resultado = (Usuario)consulta.getSingleResult();
 		 return resultado;
 	 }
-
 	 
 	 
 }

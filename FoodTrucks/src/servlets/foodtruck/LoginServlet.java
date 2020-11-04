@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import clasesDAO.DAOFactory;
-import clasesDAO.UsuarioDAO;
-import modelos.Usuario;
+import clasesDAO.*;
+import modelos.*;
 
 /**
  * Servlet implementation class LoginServlet
@@ -37,6 +36,27 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("===========================");
 					System.out.println(" <<<< Sesion iniciada >>>> ");
 					System.out.println("===========================");
+					
+					FoodTruckerDAO ftDAO = DAOFactory.getFoodTruckerDAO("HibernateJPA");
+					FoodTrucker ft = ftDAO.buscarPorIDdeUsuario(usuario.getId());		
+					
+					if (ft != null) {
+						System.out.println(" <<<< FoodTrucker >>>> ");
+						System.out.println("===========================");
+						response.sendRedirect("foodtruckerHome.jsp");
+					} else {
+						OrganizadorDAO oDAO = DAOFactory.getOrganizadorDAO("HibernateJPA");
+						Organizador o = oDAO.buscarPorIDdeUsuario(usuario.getId());	
+						if ( o != null) {
+							System.out.println(" <<<< Organizador >>>> ");
+							System.out.println("===========================");
+							response.sendRedirect("organizadorHome.jsp");
+						} else {
+							response.sendRedirect("error.html");
+							System.out.println(" <<<< No se asigno un tipo de usuario >>>> ");
+							System.out.println("===========================");
+						}		
+					}
 				} else { System.out.println("==========================="); 
 						System.out.println(" <<<< Contraseña incorrecta >>>> ");
 						System.out.println("==========================="); 
