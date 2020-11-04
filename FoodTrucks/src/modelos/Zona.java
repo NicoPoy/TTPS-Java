@@ -17,6 +17,11 @@ public class Zona {
 		super();
 	}
 
+	public Zona(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -1,7 +1,6 @@
 package modelos;
 
 import javax.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table (name="usuarios")
@@ -23,8 +22,19 @@ public class Usuario {
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
 	private FoodTrucker foodtrucker;
 	
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
+	private Organizador organizador;
+	
 	public Usuario() {
 		super();
+	}
+	
+	public Usuario(String nombre, String apellido, String username, String password) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.username = username;
+		this.password = password;
 	}
 
 	public long getId() {
@@ -75,5 +85,12 @@ public class Usuario {
 		this.foodtrucker = foodtrucker;
 	}
 	
+	public Organizador getOrganizador() {
+		return organizador;
+	}
+
+	public void setOrganizador(Organizador organizador) {
+		this.organizador = organizador;
+	}
 	
 }

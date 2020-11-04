@@ -35,14 +35,15 @@ public class FoodTruck {
 	    )
 	private List <TipoDeServicio> tipos = new ArrayList<TipoDeServicio>(); 
 		
-	@OneToMany(mappedBy = "foodtrucker", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "foodtruck", cascade = CascadeType.ALL)
 	private List<Contratacion> contrataciones = new ArrayList<>();
 	
 	public FoodTruck() {
 		super();
 	}
-
-	public FoodTruck(String nombre, String descripcion, String url, String whatsapp, String instagram, String twitter) {
+	
+	public FoodTruck(String nombre, String descripcion, String url, String whatsapp, String instagram, String twitter,
+			FoodTrucker foodtrucker, List<TipoDeServicio> tipos) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -50,6 +51,8 @@ public class FoodTruck {
 		this.whatsapp = whatsapp;
 		this.instagram = instagram;
 		this.twitter = twitter;
+		this.foodtrucker = foodtrucker;
+		this.tipos = tipos;
 	}
 
 	public long getId() {

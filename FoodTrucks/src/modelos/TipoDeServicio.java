@@ -1,6 +1,4 @@
 package modelos;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -12,11 +10,14 @@ public class TipoDeServicio {
 	private long id;
 	@Column (name = "nombre", nullable = false)
 	private String nombre;	
-	@ManyToMany(mappedBy = "tipos")
-	private List <FoodTruck> foodtrucks = new ArrayList<FoodTruck>(); 
-	
+
 	public TipoDeServicio() {
 		super();
+	}
+	
+	public TipoDeServicio(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 	public long getId() {
@@ -33,14 +34,6 @@ public class TipoDeServicio {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<FoodTruck> getFoodtrucks() {
-		return foodtrucks;
-	}
-
-	public void setFoodtrucks(List<FoodTruck> foodtrucks) {
-		this.foodtrucks = foodtrucks;
 	}
 
 	
