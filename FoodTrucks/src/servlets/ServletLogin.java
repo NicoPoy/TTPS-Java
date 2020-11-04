@@ -43,6 +43,7 @@ public class ServletLogin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		if ( (request.getParameter("usuario").isEmpty()) || (request.getParameter("clave").isEmpty()) ) {
 			response.sendRedirect("login.html");

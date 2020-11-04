@@ -92,7 +92,7 @@ public class MainDatosDePrueba {
 		em.getTransaction().commit();	*/
 		
 		UsuarioDAO uDAO = DAOFactory.getUsuarioDAO("HibernateJPA");
-		Usuario u = uDAO.getUsuarioPorUsername("nicopoy");
+		Usuario u = uDAO.buscarPorUsername("nicopoy");
 		System.out.println(u.getNombre());
 		
 	}
