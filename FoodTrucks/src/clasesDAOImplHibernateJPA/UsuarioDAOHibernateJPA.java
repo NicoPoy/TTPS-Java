@@ -12,9 +12,13 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	 
 	 @Override
 	 public Usuario getUsuarioPorUsername(String username) {
-		 String sql = " SELECT * "
-		 			+ " FROM usuarios"
-		 			+ " WHERE usuarios.username = :username ";
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+		
+		 String sql = " SELECT u "
+		 			+ " FROM Usuario as u"
+		 			+ " WHERE u.username = :username ";
+		 
 		 Query consulta = EMFactory.getEMF().createEntityManager().createQuery(sql);
 		 consulta.setParameter("username", username);
 		 Usuario resultado = (Usuario)consulta.getSingleResult();
@@ -22,4 +26,5 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	 }
 
 	
+	 
 }

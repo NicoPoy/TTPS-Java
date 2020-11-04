@@ -16,7 +16,7 @@
   	<class>modelos.FoodTruck</class>
    	<class>modelos.Contratacion</class>
     <properties>
-        <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+        <property name="javax.persistence.jdbc.driver_class" value="com.mysql.jdbc.Driver" />
         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/foodtrucksttpsgrupo3" />
         <property name="javax.persistence.jdbc.user" value="javagrupo3" />
         <property name="javax.persistence.jdbc.password" value="grupo3" />

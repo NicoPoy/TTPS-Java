@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import clasesDAO.DAOFactory;
+import clasesDAO.UsuarioDAO;
 import clasesDAOImplHibernateJPA.*;
 import modelos.*;
 
@@ -12,7 +15,7 @@ public class MainDatosDePrueba {
 		EntityManagerFactory emf = new EMFactory().getEMF();
 		EntityManager em = emf.createEntityManager();
 		
-		TipoDeServicio t1= new TipoDeServicio("Cerveza");
+	/*	TipoDeServicio t1= new TipoDeServicio("Cerveza");
 		TipoDeServicio t2= new TipoDeServicio("Pancho");
 		TipoDeServicio t3 = new TipoDeServicio("Hamburguesa");
 		TipoDeServicio t4 = new TipoDeServicio("Papas Fritas");
@@ -86,7 +89,11 @@ public class MainDatosDePrueba {
 		em.persist(uft2);
 		em.persist(ft3);
 		em.persist(ft4);
-		em.getTransaction().commit();	
+		em.getTransaction().commit();	*/
+		
+		UsuarioDAO uDAO = DAOFactory.getUsuarioDAO("HibernateJPA");
+		Usuario u = uDAO.getUsuarioPorUsername("nicopoy");
+		System.out.println(u.getNombre());
 		
 	}
 

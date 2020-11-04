@@ -14,7 +14,7 @@ public class Usuario {
 	private String nombre;
 	@Column (name = "apellido", nullable = false)
 	private String apellido;
-	@Column (name = "usuarname", nullable = false)
+	@Column (name = "username", nullable = false)
 	private String username;
 	@Column (name = "password", nullable = false)
 	private String password;
