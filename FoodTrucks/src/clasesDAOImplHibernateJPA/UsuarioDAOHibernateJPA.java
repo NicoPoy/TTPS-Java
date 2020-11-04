@@ -25,6 +25,6 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		 return resultado;
 	 }
 
-	
+	 
 	 
 }
