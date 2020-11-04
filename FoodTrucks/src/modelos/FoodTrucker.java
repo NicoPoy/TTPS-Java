@@ -6,43 +6,55 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table (name="foodtrucker")
-public class FoodTrucker extends Usuario {
+@Table (name="foodtruckers")
+public class FoodTrucker{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private long id; 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="zona_id", nullable = false)
+	private Zona zona;	
 	@OneToMany(mappedBy = "foodtrucker", cascade = CascadeType.ALL)
-	private List <FoodTruck> foodtrucks =  new ArrayList<FoodTruck>();
+	private List<FoodTruck> foodtrucks = new ArrayList<>();
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Usuario usuario;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "zona_id", referencedColumnName = "id")
-	private Zona zona;
-	
-	@OneToOne
-    @MapsId
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuarioFT_id;
-	
-	
+	public FoodTrucker() {
+		super();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public List<FoodTruck> getFoodtrucks() {
 		return foodtrucks;
 	}
-	
-	public void addFoodTruck(FoodTruck aux) {
-		foodtrucks.add(aux);
-	}
 
-	public void removeFoodTruck(FoodTruck aux) {
-		foodtrucks.remove(aux);
+	public void setFoodtrucks(List<FoodTruck> foodtrucks) {
+		this.foodtrucks = foodtrucks;
 	}
 
 	public Zona getZona() {
 		return zona;
 	}
 
-	public void setZona(Zona aux) {
-		this.zona = aux;
+	public void setZona(Zona zona) {
+		this.zona = zona;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
 	
 	
 }

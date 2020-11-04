@@ -14,7 +14,6 @@ public class Evento {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
 	@Column (name = "direccion", nullable = false)
@@ -35,96 +34,121 @@ public class Evento {
 	private Date fechayHora;
 	@Column (name = "paganorganizadores", nullable = false)
 	private boolean paganOrganizadores;
-	
-	// Relacion Evento---<>---TipoEvento
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tipo_id", nullable = false)
 	private TipoDeEvento tipo;
-	
-	// Relacion Evento---<>---Contratacion
-	@OneToMany(mappedBy="evemto")
-	private List <Contratacion> contrataciones =  new ArrayList<Contratacion>();
-	
-	// Relacion Evento---<>---Organizador
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="tipo_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name="organizador_id", nullable = false)
 	private Organizador organizador;
+	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+	private List<Contratacion> contrataciones = new ArrayList<>();
 	
-	
+	public Evento() {
+		super();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String aux) {
-		this.nombre = aux;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 	public String getDireccion() {
 		return direccion;
 	}
-	public void setDireccion(String aux) {
-		this.direccion = aux;
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
+
 	public String getProvincia() {
 		return provincia;
 	}
-	public void setProvincia(String aux) {
-		this.provincia = aux;
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
 	}
+
 	public String getGeolocalizacion() {
 		return geolocalizacion;
 	}
-	public void setGeolocalizacion(String aux) {
-		this.geolocalizacion = aux;
+
+	public void setGeolocalizacion(String geolocalizacion) {
+		this.geolocalizacion = geolocalizacion;
 	}
+
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String aux) {
-		this.email = aux;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(String aux) {
-		this.telefono = aux;
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String aux) {
-		this.descripcion = aux;
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
+
 	public int getCodigoPostal() {
 		return codigoPostal;
 	}
-	public void setCodigoPostal(int aux) {
-		this.codigoPostal = aux;
+
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
+
 	public Date getFechayHora() {
 		return fechayHora;
 	}
-	public void setFechayHora(Date aux) {
-		this.fechayHora = aux;
+
+	public void setFechayHora(Date fechayHora) {
+		this.fechayHora = fechayHora;
 	}
-	public boolean paganOrganizadores() {
+
+	public boolean isPaganOrganizadores() {
 		return paganOrganizadores;
 	}
-	public void paganOrganizadores(boolean aux) {
-		this.paganOrganizadores = aux;
+
+	public void setPaganOrganizadores(boolean paganOrganizadores) {
+		this.paganOrganizadores = paganOrganizadores;
 	}
+
 	public TipoDeEvento getTipo() {
 		return tipo;
 	}
-	public void setTipo(TipoDeEvento aux) {
-		this.tipo = aux;
+
+	public void setTipo(TipoDeEvento tipo) {
+		this.tipo = tipo;
 	}
-	public List<Contratacion> getContrataciones() {
-		return contrataciones;
+
+	public Organizador getOrganizador() {
+		return organizador;
 	}
-	public void addContrataciones(Contratacion aux) {
-		contrataciones.add(aux);
-	}
-	public void removeContrataciones(Contratacion aux) {
-		contrataciones.remove(aux);
+
+	public void setOrganizador(Organizador organizador) {
+		this.organizador = organizador;
 	}
 
 	

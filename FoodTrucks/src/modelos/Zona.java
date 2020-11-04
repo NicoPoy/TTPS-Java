@@ -11,17 +11,18 @@ public class Zona {
 	
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
-	
-    @OneToOne(mappedBy = "zona")
-    private FoodTrucker foodtrucker;
+
 
 	public Zona() {
 		super();
 	}
 
-	public Zona(String nombre) {
-		super();
-		this.nombre = nombre;
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -30,8 +31,7 @@ public class Zona {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	
+	}	
+
 
 }

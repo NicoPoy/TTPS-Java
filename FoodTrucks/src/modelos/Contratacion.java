@@ -1,6 +1,7 @@
 package modelos;
 import javax.persistence.*;
 
+
 @Entity
 @Table (name="contrataciones")
 
@@ -9,7 +10,6 @@ public class Contratacion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
 	@Column (name = "estado", nullable = false)
 	private int estado; 
 	@Column (name = "limpieza", nullable = false)
@@ -22,61 +22,111 @@ public class Contratacion {
 	private int sabor;
 	@Column (name = "disenio", nullable = false)
 	private int disenio;
-	// Relacion Evento---<>---Contratacion
-	@ManyToOne
-    @JoinColumn(name="evento_id", nullable=false)
-    private Evento evento;
-	// Relacion Foodtruck---<>---Contratacion
-	@ManyToOne
-    @JoinColumn(name="evento_id", nullable=false)
-    private FoodTruck foodtruck;	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="evento_id", nullable = false)
+	private Evento evento;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="foodtruck_id", nullable = false)
+	private FoodTruck foodtruck;
 	
+	public Contratacion() {
+		super();
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int aux) {
-		this.estado = aux;
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
+
 
 	public int getLimpieza() {
 		return limpieza;
 	}
 
-	public void setLimpieza(int aux) {
-		this.limpieza = aux;
+
+	public void setLimpieza(int limpieza) {
+		this.limpieza = limpieza;
 	}
+
 
 	public int getSimpatia() {
 		return simpatia;
 	}
 
-	public void setSimpatia(int aux) {
-		this.simpatia = aux;
+
+	public void setSimpatia(int simpatia) {
+		this.simpatia = simpatia;
 	}
+
 
 	public int getCalidadPrecio() {
 		return calidadPrecio;
 	}
 
-	public void setCalidadPrecio(int aux) {
-		this.calidadPrecio = aux;
+
+	public void setCalidadPrecio(int calidadPrecio) {
+		this.calidadPrecio = calidadPrecio;
 	}
+
 
 	public int getSabor() {
 		return sabor;
 	}
 
-	public void setSabor(int aux) {
-		this.sabor = aux;
+
+	public void setSabor(int sabor) {
+		this.sabor = sabor;
 	}
+
 
 	public int getDisenio() {
 		return disenio;
 	}
 
-	public void setDisenio(int aux) {
-		this.disenio = aux;
+
+	public void setDisenio(int disenio) {
+		this.disenio = disenio;
 	}
+
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+
+	public FoodTruck getFoodtruck() {
+		return foodtruck;
+	}
+
+
+	public void setFoodtruck(FoodTruck foodtruck) {
+		this.foodtruck = foodtruck;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

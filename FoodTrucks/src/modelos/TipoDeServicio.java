@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table (name="tipodeservicio")
+@Table (name="tipo_servicio")
 public class TipoDeServicio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,17 +19,30 @@ public class TipoDeServicio {
 		super();
 	}
 
-	public TipoDeServicio(String nombre) {
-		super();
-		this.nombre = nombre;
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String aux) {
-		this.nombre = aux;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
+	public List<FoodTruck> getFoodtrucks() {
+		return foodtrucks;
+	}
+
+	public void setFoodtrucks(List<FoodTruck> foodtrucks) {
+		this.foodtrucks = foodtrucks;
+	}
+
+	
 
 }

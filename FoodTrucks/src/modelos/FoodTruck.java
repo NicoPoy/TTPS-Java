@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-
 @Entity
-@Table (name="foodtruck")
+@Table (name="foodtrucks")
 public class FoodTruck {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -24,11 +22,10 @@ public class FoodTruck {
 	private String instagram;
 	@Column (name = "twitter", nullable = false)
 	private String twitter;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="foodtrucker_id", nullable = false)
-	private FoodTrucker foodtrucker ;
 	
-	//private List <Image> imagenes =  new ArrayList<Image>();
+	@ManyToOne
+	@JoinColumn(name="foodtrucker_id", nullable = false)
+	private FoodTrucker foodtrucker;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 		@JoinTable(
@@ -37,10 +34,9 @@ public class FoodTruck {
 	        inverseJoinColumns = { @JoinColumn(name = "tiposervicio_id") }
 	    )
 	private List <TipoDeServicio> tipos = new ArrayList<TipoDeServicio>(); 
-	
-	@OneToMany(mappedBy="evemto")
-	private List <Contratacion> contrataciones =  new ArrayList<Contratacion>();
-	
+		
+	@OneToMany(mappedBy = "foodtrucker", cascade = CascadeType.ALL)
+	private List<Contratacion> contrataciones = new ArrayList<>();
 	
 	public FoodTruck() {
 		super();
@@ -56,90 +52,81 @@ public class FoodTruck {
 		this.twitter = twitter;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String aux) {
-		this.nombre = aux;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String aux) {
-		this.descripcion = aux;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String aux) {
-		this.url = aux;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getWhatsapp() {
 		return whatsapp;
 	}
 
-	public void setWhatsapp(String aux) {
-		this.whatsapp = aux;
+	public void setWhatsapp(String whatsapp) {
+		this.whatsapp = whatsapp;
 	}
 
 	public String getInstagram() {
 		return instagram;
 	}
 
-	public void setInstagram(String aux) {
-		this.instagram = aux;
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
 	}
 
 	public String getTwitter() {
 		return twitter;
 	}
 
-	public void setTwitter(String aux) {
-		this.twitter = aux;
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
 	}
 
-	/*
-	public List<Image> getImagenes() {
-		return imagenes;
+	public FoodTrucker getFoodtrucker() {
+		return foodtrucker;
 	}
-	
-	public void addImagen(Image aux) {
-		imagenes.add(aux);
+
+	public void setFoodtrucker(FoodTrucker foodtrucker) {
+		this.foodtrucker = foodtrucker;
 	}
-	
-	public void removeImagen(Image aux) {
-		imagenes.remove(aux);
-	}
-	*/
-	
+
 	public List<TipoDeServicio> getTipos() {
 		return tipos;
 	}
 
-	public void addTipo(TipoDeServicio aux) {
-		tipos.add(aux);
+	public void setTipos(List<TipoDeServicio> tipos) {
+		this.tipos = tipos;
 	}
 
-	public void removeTipo(TipoDeServicio aux) {
-		tipos.remove(aux);
-	}
 	
-	public List <Contratacion> getContrataciones() {
-		return contrataciones;
-	}
 	
-	public void addContrataciones(Contratacion aux) {
-		contrataciones.add(aux);
-	}
 	
-	public void removeContrataciones(Contratacion aux) {
-		contrataciones.remove(aux);
-	}
+	
 	
 }
