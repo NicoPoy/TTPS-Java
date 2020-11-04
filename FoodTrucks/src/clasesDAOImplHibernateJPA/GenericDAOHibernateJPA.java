@@ -4,6 +4,13 @@ import java.io.Serializable;
 import clasesDAO.GenericDAO;
 
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
+	
+	protected Class<T> clasePersistente;
+
+	
+	public GenericDAOHibernateJPA(Class<T> clase) {
+		clasePersistente = clase;
+	}
 
 	@Override
 	public T actualizar(T entity) {
