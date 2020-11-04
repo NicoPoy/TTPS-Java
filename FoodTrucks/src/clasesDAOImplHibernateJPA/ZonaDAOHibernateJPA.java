@@ -4,5 +4,9 @@ import clasesDAO.ZonaDAO;
 import modelos.Zona;
 
 public class ZonaDAOHibernateJPA extends GenericDAOHibernateJPA<Zona> implements ZonaDAO{
+	 
+	public ZonaDAOHibernateJPA() {
+		super(Zona.class);
+	 }
 
 }

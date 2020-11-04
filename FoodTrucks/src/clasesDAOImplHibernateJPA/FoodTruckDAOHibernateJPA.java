@@ -4,5 +4,8 @@ import clasesDAO.FoodTruckDAO;
 import modelos.FoodTruck;
 
 public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> implements FoodTruckDAO{
-
+	 
+	public FoodTruckDAOHibernateJPA() {
+		super(FoodTruck.class);
+	 }
 }

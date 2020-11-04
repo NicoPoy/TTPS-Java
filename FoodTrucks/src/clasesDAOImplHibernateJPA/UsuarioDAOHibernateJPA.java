@@ -14,7 +14,7 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	 @Override
 	 public Usuario getUsuarioPorUsername(String username) {
 		 Query consulta = EMFactory.getEMF().createEntityManager().
-				 createQuery("consulta loca");
+		 createQuery("consulta loca");
 		 consulta.setParameter(1, username);
 		 Usuario resultado = (Usuario)consulta.getSingleResult();
 		 return resultado;
