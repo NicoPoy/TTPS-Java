@@ -16,4 +16,8 @@ public interface DAOFactory {
 		}
 		return retornar;
 	}
+	
+	public static UsuarioDAO getUsuarioDAO(){
+			return new UsuarioDAOHibernateJPA();
+		}
 }
