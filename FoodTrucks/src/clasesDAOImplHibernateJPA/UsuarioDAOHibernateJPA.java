@@ -11,7 +11,7 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	 }
 	 
 	 @Override
-	 public Usuario getUsuarioPorUsername(String username) {
+	 public Usuario buscarPorUsername(String username) {
 		EntityManagerFactory emf = new EMFactory().getEMF();
 		EntityManager em = emf.createEntityManager();
 		

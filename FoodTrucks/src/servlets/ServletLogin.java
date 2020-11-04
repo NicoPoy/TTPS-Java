@@ -46,7 +46,7 @@ public class ServletLogin extends HttpServlet {
 		EntityManager em = emf.createEntityManager();
 		
 		UsuarioDAO uDAO = DAOFactory.getUsuarioDAO("HibernateJPA");
-		Usuario u = uDAO.getUsuarioPorUsername("nicopoy");
+		Usuario u = uDAO.buscarPorUsername("nicopoy");
 		System.out.println(u.getNombre());
 		
 		
