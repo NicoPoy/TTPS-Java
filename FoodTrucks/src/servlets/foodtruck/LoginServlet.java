@@ -35,12 +35,11 @@ public class LoginServlet extends HttpServlet {
 					request.getSession(true).setAttribute("usuario", usuario);
 					System.out.println("===========================");
 					System.out.println(" <<<< Sesion iniciada >>>> ");
-					System.out.println("===========================");
-					
+					System.out.println("===========================");				
 					FoodTruckerDAO ftDAO = DAOFactory.getFoodTruckerDAO("HibernateJPA");
-					FoodTrucker ft = ftDAO.buscarPorIDdeUsuario(usuario.getId());		
-					
+					FoodTrucker ft = ftDAO.buscarPorIDdeUsuario(usuario.getId());							
 					if (ft != null) {
+						request.getSession(false).setAttribute("foodtrucker", ft);
 						System.out.println(" <<<< FoodTrucker >>>> ");
 						System.out.println("===========================");
 						response.sendRedirect("foodtruckerHome.jsp");
@@ -48,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 						OrganizadorDAO oDAO = DAOFactory.getOrganizadorDAO("HibernateJPA");
 						Organizador o = oDAO.buscarPorIDdeUsuario(usuario.getId());	
 						if ( o != null) {
+							request.getSession(false).setAttribute("organizador", o);
 							System.out.println(" <<<< Organizador >>>> ");
 							System.out.println("===========================");
 							response.sendRedirect("organizadorHome.jsp");
