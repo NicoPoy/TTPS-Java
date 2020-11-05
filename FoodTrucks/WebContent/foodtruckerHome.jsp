@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Home - FoodTrucker</title>
 </head>
 <body>
 
@@ -47,7 +47,7 @@
 			}
 			
 			out.print( "</td>");		
-			out.print("<td> <a href='editarFoodTruck.jsp'> Editar </td> </tr>");
+			out.print("<td> <a href='editarFoodTruck.jsp?id="+foodtruck.getId()+"'> Editar </td> </tr>");
 		}
 		
 		out.print ("</table>");
