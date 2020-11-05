@@ -13,10 +13,13 @@
 	<% if (session.getAttribute("usuario") != null ) {
 		
 		out.print ("<h1> Bienvenido " + ( (Usuario) session.getAttribute("usuario") ).getUsername() + "</h1>");
-		out.print ("<table style='width:100%'> <tr>");
+		out.print ("<table style='width:90%'> <tr>");
 		
+		out.print ("<td> <a href='editarUsuario.jsp'> Editar Usuario </td>");
 		out.print ("<td> <a href='agregarFoodTruck.jsp'> Agregar FoodTruck </td>");
+		out.print ("<td> <a href='editarFoodTruck.jsp'> Editar FoodTruck </td>");
 		out.print ("<td> <a href='borrarFoodTruck.jsp'> Borrar FoodTruck </td>");
+		
 		out.print ("<td> <form action='LogOutServlet' method='post'> <input type='submit' value='Cerrar Sesion' > </from> </td>");
 		
 		out.print ("</tr> </table>");

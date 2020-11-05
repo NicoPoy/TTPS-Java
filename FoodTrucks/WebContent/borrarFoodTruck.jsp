@@ -10,13 +10,17 @@
 <body>
 	
 	<% if (session.getAttribute("usuario") != null ) {
-		
-		FoodTrucker ft = (FoodTrucker) session.getAttribute("foodtrucker");
-		List<FoodTruck> foodtrucks = ft.getFoodtrucks();
+
+		FoodTrucker uft = (FoodTrucker) session.getAttribute("foodtrucker");
+		FoodTruckerDAO uftDAO = DAOFactory.getFoodTruckerDAO("HibernateJPA");
+		FoodTrucker ftPersistido = (FoodTrucker) uftDAO.recuperar(uft.getId());
+
+		FoodTruckDAO ftDAO = DAOFactory.getFoodTruckDAO("HibernateJPA");
+		List<FoodTruck> foodtrucks = ftDAO.encontrarTodosParaUsuarioID(uft.getUsuario().getId());
 		Iterator<FoodTruck> it = foodtrucks.iterator();
-		out.println("<h1> Marque los FoodTrucks que quiere eliminar </h1> ");
 		
-		out.println("<form action='borrarFoodTruck' method='post'> ");
+		out.println("<h1> Marque los FoodTrucks que quiere eliminar </h1>");
+		out.println("<form action='borrarFoodTruck' method='post'>");
 		
 		while( it.hasNext() ) {
 			FoodTruck foodtruck = it.next();

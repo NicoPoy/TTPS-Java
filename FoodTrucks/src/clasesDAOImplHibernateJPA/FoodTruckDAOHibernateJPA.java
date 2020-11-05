@@ -47,6 +47,24 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 		 FoodTruck resultado = (FoodTruck) consulta.getSingleResult();
 		 return resultado;
 	}
+
+	@Override
+	public FoodTrucker devolverFoodTrucker() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TipoDeServicio> devolverTipos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Contratacion> devolverSolicitudes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

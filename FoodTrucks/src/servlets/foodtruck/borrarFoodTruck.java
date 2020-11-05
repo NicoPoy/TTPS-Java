@@ -43,7 +43,10 @@ public class borrarFoodTruck extends HttpServlet {
 		
 		if ( request.getSession(false) != null ) { 
 			
-			FoodTrucker ft = (FoodTrucker) request.getSession(false).getAttribute("foodtrucker");	
+			FoodTrucker Sessionft = (FoodTrucker) request.getSession(false).getAttribute("foodtrucker");
+			FoodTruckerDAO uftDAO = DAOFactory.getFoodTruckerDAO("HibernateJPA");
+			FoodTrucker ft = (FoodTrucker) uftDAO.recuperar(Sessionft.getId());		
+			
 			List<FoodTruck> foodtrucks = ft.getFoodtrucks();
 			Iterator<FoodTruck> it = foodtrucks.iterator();
 			
