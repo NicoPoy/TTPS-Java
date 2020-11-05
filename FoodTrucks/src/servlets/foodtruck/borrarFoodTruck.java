@@ -49,20 +49,18 @@ public class borrarFoodTruck extends HttpServlet {
 			
 			while( it.hasNext() ) {
 				FoodTruck foodtruck = it.next();
-				
 				if ( request.getParameter( foodtruck.getNombre() ) != null ) {
-					
 					FoodTruckDAO ftDAO = DAOFactory.getFoodTruckDAO("HibernateJPA");	
 					FoodTruck ftPersistido = ftDAO.encontrarPorNombre(foodtruck.getNombre());
-					
-					ftDAO.borrar(ftPersistido.getId());
-					
-					System.out.println(" <<<< FoodTruck " + foodtruck.getNombre() + " Borrado >>>>");
+					ftPersistido.setTipos(null);
+					ftDAO.actualizar(ftPersistido);
+					ftDAO.borrar(ftPersistido.getId());					
+					System.out.println(" <<<< FoodTruck Borrado >>>>");
 				}	
 			}
-			
 		}
 		
+		response.sendRedirect("foodtruckerHome.jsp");	
 		doGet(request, response);
 	}
 

@@ -10,7 +10,7 @@ public class FoodTruck {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	@Column (name = "nombre", nullable = false)
+	@Column (name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	@Column (name = "descripcion")
 	private String descripcion;
