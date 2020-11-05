@@ -73,13 +73,24 @@ public class agregarFoodTruck extends HttpServlet {
 			FoodTruck ftNew = new FoodTruck(nombre, descripcion, url, whatsapp, instagram, twitter, ft);		
 			FoodTruckDAO ftDAO = DAOFactory.getFoodTruckDAO("HibernateJPA");
 			
+			
+			//=========================================
+			//=========================================
+						//GUARDAR FOOD TRUCK
+			//=========================================
+			//=========================================
+			
 			ftDAO.persistir(ftNew);
 			
 			//=========================================
 			//=========================================
-			//ASIGNAR LOS TIPOS
+						//ASIGNAR LOS TIPOS
 			//=========================================
 			//=========================================
+			
+			ftNew = ftDAO.encontrarPorNombre(nombre);
+			ftNew.setTipos(tiposNew);
+			ftDAO.actualizar(ftNew);
 			
 			response.sendRedirect("foodtruckerHome.jsp");
 		

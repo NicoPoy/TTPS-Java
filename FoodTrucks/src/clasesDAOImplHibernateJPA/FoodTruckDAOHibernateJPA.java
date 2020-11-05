@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import clasesDAO.FoodTruckDAO;
-import modelos.FoodTruck;
 import modelos.*;
 
 
@@ -35,9 +34,18 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 	}
 
 	@Override
-	public FoodTruck encontrarPorID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public FoodTruck encontrarPorNombre(String nombre) {
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+			
+		String sql = " SELECT ft "
+					+ " FROM FoodTruck ft"
+		 			+ " WHERE ft.nombre = :nombre ";
+			 
+		 Query consulta = EMFactory.getEMF().createEntityManager().createQuery(sql);
+		 consulta.setParameter("nombre", nombre);
+		 FoodTruck resultado = (FoodTruck) consulta.getSingleResult();
+		 return resultado;
 	}
 	
 	

@@ -18,8 +18,12 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 
 	@Override
 	public T actualizar(T entity) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(entity);
+		em.getTransaction().commit();
+		return entity;
 	}
 
 	@Override
