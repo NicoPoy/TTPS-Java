@@ -1,0 +1,37 @@
+<%@ page import="clasesDAO.*, modelos.*, java.util.* " %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<% if (session.getAttribute("usuario") != null ) {
+		
+		FoodTrucker ft = (FoodTrucker) session.getAttribute("foodtrucker");
+		List<FoodTruck> foodtrucks = ft.getFoodtrucks();
+		Iterator<FoodTruck> it = foodtrucks.iterator();
+		out.println("<h1> Marque los FoodTrucks que quiere eliminar </h1> ");
+		
+		out.println("<form action='borrarFoodTruck' method='post'> ");
+		
+		while( it.hasNext() ) {
+			FoodTruck foodtruck = it.next();
+			out.println("<p><input type='checkbox' name="+ foodtruck.getNombre() +" value="+ foodtruck.getNombre() +">"+ foodtruck.getNombre() +"</p>");
+		}
+		
+		out.print(" <input type='submit' value='Eliminar'> ");
+		out.print(" </form> ");	
+		
+		
+		
+	}
+	
+	
+	%>
+
+</body>
+</html>

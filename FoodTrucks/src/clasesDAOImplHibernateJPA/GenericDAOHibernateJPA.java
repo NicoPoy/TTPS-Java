@@ -26,17 +26,28 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 		return entity;
 	}
 
-	@Override
+/*	@Override
 	public void borrar(T entity) {
-		// TODO Auto-generated method stub
-		
-	}
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+		em.remove(entity);
+		em.getTransaction().commit();
+	} */
 
 	@Override
-	public T borrar(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+	public T borrar(Serializable id) {	
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		T entity = em.find(clasePersistente,id);
+		if ( entity != null ) {
+			em.remove(entity);
+			em.getTransaction().commit();
+		}else { em.getTransaction().rollback();
+				System.out.println("<<< Fallo el Borrar: No se encontro ninguna entidad >>>"); }
+		return entity;
 	}
+	
 
 	@Override
 	public boolean existe(Serializable id) {
@@ -57,12 +68,6 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 
 	@Override
 	public T recuperar(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T merge(T entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

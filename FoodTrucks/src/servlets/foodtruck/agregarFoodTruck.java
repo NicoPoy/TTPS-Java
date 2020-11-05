@@ -3,7 +3,6 @@ package servlets.foodtruck;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.persistence.Column;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

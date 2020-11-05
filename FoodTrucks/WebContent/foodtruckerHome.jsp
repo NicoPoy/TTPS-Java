@@ -16,28 +16,43 @@
 		out.print ("<table style='width:100%'> <tr>");
 		
 		out.print ("<td> <a href='agregarFoodTruck.jsp'> Agregar FoodTruck </td>");
+		out.print ("<td> <a href='borrarFoodTruck.jsp'> Borrar FoodTruck </td>");
 		out.print ("<td> <form action='LogOutServlet' method='post'> <input type='submit' value='Cerrar Sesion' > </from> </td>");
 		
 		out.print ("</tr> </table>");
 		
 		FoodTruckDAO ftDAO = DAOFactory.getFoodTruckDAO("HibernateJPA");
 		List<FoodTruck> listResult = ftDAO.encontrarTodosParaUsuarioID( ((Usuario) session.getAttribute("usuario")).getId() );
-		
 		Iterator<FoodTruck> it = listResult.iterator();
 		
-		out.print (" <h3> ====================================================== </h3>");
-		out.print (" <h3>                      Mis FoodTrucks                    </h3>");
-		out.print (" <h3> ====================================================== </h3>");
+		out.print (" <h3> ======================================================================== </h3>");
+		out.print (" <h3>                   		   Mis FoodTrucks     			               </h3>");
+		out.print (" <h3> ======================================================================== </h3>");
+		
+		out.print ("<table style='width:100%'>");
 		
 		while( it.hasNext() ) {
 		   	FoodTruck foodtruck = it.next();
-			out.println( "<h4>" + foodtruck.getNombre() + "</h4>");
-		   	//out.println("<br> <br>");
-			out.println("---------------------------------------------------------------------------");
+			out.print( "<tr> <td>" + foodtruck.getNombre() + "</td>");
+			Iterator<TipoDeServicio> serviciosIt = foodtruck.getTipos().iterator();
+			
+			out.print("<td> Servicios:");
+		
+			while ( serviciosIt.hasNext()) {
+				TipoDeServicio tipo = serviciosIt.next();
+				out.print(" " + tipo.getNombre() );
+			}
+			
+			out.print( "</td>");		
+			out.print("<td> <a href='editarFoodTruck.jsp'> Editar </td> </tr>");
 		}
 		
+		out.print ("</table>");
+				
+	} else { out.print ("No estas logeado"); }
 		
-	}  %>	
+	%>	
+	
 
 </body>
 </html>

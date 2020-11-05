@@ -43,5 +43,6 @@ public class TipoDeServicioDAOHibernateJPA extends GenericDAOHibernateJPA<TipoDe
 		 return resultado;
 	}
 	
+	
 
 }
