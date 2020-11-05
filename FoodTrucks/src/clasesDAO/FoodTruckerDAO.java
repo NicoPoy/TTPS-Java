@@ -6,8 +6,8 @@ import modelos.*;
 public interface FoodTruckerDAO extends GenericDAO <FoodTrucker> {	
 	
 	public FoodTrucker buscarPorIDdeUsuario(long idUsuario);
-	public Usuario devolverUsuario();
+	/*public Usuario devolverUsuario();
 	public Zona devolverZona();
-	public List<FoodTruck> devolverFoodTrucks();
+	public List<FoodTruck> devolverFoodTrucks();*/
 	
 }

@@ -32,7 +32,7 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 		List<FoodTruck> resultado = consulta.getResultList();	 
 		return resultado;
 	}
-
+	
 	@Override
 	public FoodTruck encontrarPorNombre(String nombre) {
 		EntityManagerFactory emf = new EMFactory().getEMF();

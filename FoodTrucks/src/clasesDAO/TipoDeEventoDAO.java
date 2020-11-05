@@ -6,8 +6,8 @@ import modelos.*;
 
 public interface TipoDeEventoDAO extends GenericDAO<TipoDeEvento> {
 
-	public TipoDeEvento buscarPorNombre();
-	public List<Organizador> devolverOrganizadores();
+	public TipoDeEvento buscarPorNombre(String nombre);
+	/*public List<Organizador> devolverOrganizadores();*/
 	
 	
 }

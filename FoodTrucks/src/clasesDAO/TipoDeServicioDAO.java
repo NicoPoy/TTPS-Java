@@ -7,6 +7,6 @@ public interface TipoDeServicioDAO extends GenericDAO<TipoDeServicio> {
 	
 	public List<TipoDeServicio> traerTodos();
 	public TipoDeServicio encontrarPorNombre(String nombre);
-	public List<FoodTruck> devolverFoodTrucks();
+	/*public List<FoodTruck> devolverFoodTrucks();*/
 	
 }

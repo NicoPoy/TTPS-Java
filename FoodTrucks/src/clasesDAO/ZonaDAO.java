@@ -6,7 +6,7 @@ import modelos.*;
 
 public interface ZonaDAO extends GenericDAO<Zona> {
 
-	 public Zona buscarPorNombre(String nombre);
-	 public List<FoodTrucker> devolverFoodTruckers();
+	public Zona buscarPorNombre(String nombre);
+	/*public List<FoodTrucker> devolverFoodTruckers();*/
 	
 }

@@ -6,8 +6,8 @@ import modelos.*;
 
 public interface EventoDAO extends GenericDAO<Evento> {
 
-	public Organizador devolverOrganizador();
+	/*public Organizador devolverOrganizador();
 	public TipoDeEvento devolverTipo();
-	public List<Contratacion> devolverSolicitudes();	
+	public List<Contratacion> devolverSolicitudes();*/
 	
 }
