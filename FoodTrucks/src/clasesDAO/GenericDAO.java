@@ -9,6 +9,7 @@ public interface GenericDAO<T> {
 	 public boolean existe(Serializable id);
 	 public T persistir(T entity);
 	 public T recuperar(Serializable id);
+	 public T merge(T entity);
 
 }
 

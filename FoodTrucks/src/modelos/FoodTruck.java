@@ -12,15 +12,15 @@ public class FoodTruck {
 	private long id;
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
-	@Column (name = "descripcion", nullable = false)
+	@Column (name = "descripcion")
 	private String descripcion;
-	@Column (name = "url", nullable = false)
+	@Column (name = "url")
 	private String url;
-	@Column (name = "whatsapp", nullable = false)
+	@Column (name = "whatsapp")
 	private String whatsapp;
-	@Column (name = "instagram", nullable = false)
+	@Column (name = "instagram")
 	private String instagram;
-	@Column (name = "twitter", nullable = false)
+	@Column (name = "twitter")
 	private String twitter;
 	
 	@ManyToOne
@@ -55,6 +55,18 @@ public class FoodTruck {
 		this.tipos = tipos;
 	}
 
+	public FoodTruck(String nombre, String descripcion, String url, String whatsapp, String instagram, String twitter,
+			FoodTrucker foodtrucker) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.url = url;
+		this.whatsapp = whatsapp;
+		this.instagram = instagram;
+		this.twitter = twitter;
+		this.foodtrucker = foodtrucker;
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -1,6 +1,10 @@
 package clasesDAOImplHibernateJPA;
 import java.io.Serializable;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
 import clasesDAO.GenericDAO;
 
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
@@ -37,13 +41,24 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 	}
 
 	@Override
-	public T persistir(T entity) {
+	public T persistir(T entity) {		
+		EntityManagerFactory emf = new EMFactory().getEMF();
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+		return entity;
+	} 
+
+
+	@Override
+	public T recuperar(Serializable id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public T recuperar(Serializable id) {
+	public T merge(T entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

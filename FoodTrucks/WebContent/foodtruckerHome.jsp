@@ -1,4 +1,4 @@
-<%@ page import=" modelos.FoodTrucker, modelos.Usuario, clasesDAO.*, modelos.*, java.util.* " %>
+<%@ page import="clasesDAO.*, modelos.*, java.util.* " %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -32,9 +32,10 @@
 		while( it.hasNext() ) {
 		   	FoodTruck foodtruck = it.next();
 			out.println( "<h4>" + foodtruck.getNombre() + "</h4>");
-		   	out.println("<br> <br>");
-			out.println("-----------------------------------------");
+		   	//out.println("<br> <br>");
+			out.println("---------------------------------------------------------------------------");
 		}
+		
 		
 	}  %>	
 

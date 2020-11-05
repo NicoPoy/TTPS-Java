@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import clasesDAO.FoodTruckDAO;
 import modelos.FoodTruck;
+import modelos.*;
+
 
 public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> implements FoodTruckDAO{
 	 
@@ -31,4 +33,12 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 		List<FoodTruck> resultado = consulta.getResultList();	 
 		return resultado;
 	}
+
+	@Override
+	public FoodTruck encontrarPorID(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }

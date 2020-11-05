@@ -15,6 +15,7 @@ public class MainDatosDePrueba {
 		EntityManagerFactory emf = new EMFactory().getEMF();
 		EntityManager em = emf.createEntityManager();
 		
+		
 	/*	TipoDeServicio t1= new TipoDeServicio("Cerveza");
 		TipoDeServicio t2= new TipoDeServicio("Pancho");
 		TipoDeServicio t3 = new TipoDeServicio("Hamburguesa");
