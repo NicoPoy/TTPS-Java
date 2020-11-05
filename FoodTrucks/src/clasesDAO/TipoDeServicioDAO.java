@@ -1,12 +1,12 @@
 package clasesDAO;
 
 import java.util.List;
-import modelos.TipoDeServicio;
+import modelos.*;
 
 public interface TipoDeServicioDAO extends GenericDAO<TipoDeServicio> {
 	
 	public List<TipoDeServicio> traerTodos();
 	public TipoDeServicio encontrarPorNombre(String nombre);
-	
+	public List<FoodTruck> devolverFoodTrucks();
 	
 }
