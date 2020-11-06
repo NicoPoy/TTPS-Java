@@ -77,8 +77,6 @@ public class editarFoodTruck extends HttpServlet {
 		ftDAO.actualizar(ftNew);
 		response.sendRedirect("foodtruckerHome.jsp");
 		
-		
-		
 		doGet(request, response);
 	}
 
