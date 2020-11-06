@@ -38,6 +38,11 @@ public class FoodTrucker{
 		this.usuario = usuario;
 	}
 	
+	public FoodTrucker(Usuario usuario) {
+		super();
+		this.usuario = usuario;
+	}
+
 	public long getId() {
 		return id;
 	}

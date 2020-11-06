@@ -40,7 +40,7 @@ public class ServletLogOut extends HttpServlet {
 			System.out.println("===========================");
 			System.out.println(" <<<< Sesion Cerrada >>>> ");
 			System.out.println("===========================");	
-			response.sendRedirect("homeLogin.html");
+			response.sendRedirect("login.jsp");
 		}
 		
 	}

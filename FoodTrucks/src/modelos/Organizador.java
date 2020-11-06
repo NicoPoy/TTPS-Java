@@ -21,6 +21,11 @@ public class Organizador{
 	public Organizador() {
 		super();
 	}
+	
+	public Organizador(Usuario usuario) {
+		super();
+		this.usuario = usuario;
+	}
 
 	public long getId() {
 		return id;
