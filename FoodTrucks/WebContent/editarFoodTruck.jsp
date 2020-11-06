@@ -21,7 +21,7 @@
 			FoodTruckDAO fDAO = DAOFactory.getFoodTruckDAO("HibernateJPA");
 			FoodTruck f = fDAO.recuperar(id);
 			
-			out.println("<form action='editarFoodTruck' method='post'> ");
+			out.println("<form action='editarFoodTruck?id="+id+"' method='post'> ");
 			out.println(" <p> Nombre del FoodTruck: <input type='text' name='nombre' value="+ f.getNombre() +"> </p> ");
 			out.println(" <p> Descripcion: <input type='text' name='descripcion' value="+ f.getDescripcion() +"> </p> ");
 			out.println(" <p> Instagram: <input type='text' name='instagram' value="+ f.getInstagram() +"> </p> ");
@@ -29,23 +29,9 @@
 			out.println(" <p> Whatsapp: <input type='text' name='whatsapp' value="+ f.getWhatsapp() +"> </p>");
 			out.println(" <p> Pagina Web: <input type='text' name='url' value="+ f.getUrl() +"> </p> ");
 			
-			Boolean tiene;
-			
 			while( it.hasNext() ) {
-				tiene=false;	
 				TipoDeServicio tipo = it.next();
-				while("la lista no se acabo"){
-						"lista.siguiente"
-						if("elemento actual = tipo"){
-							tiene=true;
-						}
-				}
-				if (tiene){
-					out.println("<p><input type='checkbox' name="+ tipo.getNombre() +" value="+ tipo.getNombre() +" checked='true'>"+ tipo.getNombre() +"</p>");
-				}
-				else{
-					out.println("<p><input type='checkbox'  name="+ tipo.getNombre() +" value="+ tipo.getNombre() +" checked='false'>"+ tipo.getNombre() +"</p>");
-				}
+				out.println("<p><input type='checkbox' name="+ tipo.getNombre() +" value="+ tipo.getNombre() +">"+ tipo.getNombre() +"</p>");
 			}
 			
 			out.print(" <input type='submit' value='Cargar'> ");

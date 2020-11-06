@@ -19,7 +19,7 @@ public class MainDatosDePrueba {
 		TipoDeServicio t1= new TipoDeServicio("Cerveza");
 		TipoDeServicio t2= new TipoDeServicio("Pancho");
 		TipoDeServicio t3 = new TipoDeServicio("Hamburguesa");
-		TipoDeServicio t4 = new TipoDeServicio("Papas Fritas");
+		TipoDeServicio t4 = new TipoDeServicio("Papas");
 		
 		em.getTransaction().begin();
 		em.persist(t1);

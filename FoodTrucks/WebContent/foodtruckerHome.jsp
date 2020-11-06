@@ -17,7 +17,6 @@
 		
 		out.print ("<td> <a href='editarUsuario.jsp'> Editar Usuario </td>");
 		out.print ("<td> <a href='agregarFoodTruck.jsp'> Agregar FoodTruck </td>");
-		out.print ("<td> <a href='editarFoodTruck.jsp'> Editar FoodTruck </td>");
 		out.print ("<td> <a href='borrarFoodTruck.jsp'> Borrar FoodTruck </td>");
 		
 		out.print ("<td> <form action='LogOutServlet' method='post'> <input type='submit' value='Cerrar Sesion' > </from> </td>");
