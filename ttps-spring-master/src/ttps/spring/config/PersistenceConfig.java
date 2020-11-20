@@ -36,9 +36,9 @@ public class PersistenceConfig {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setUsername("root");
-		driverManagerDataSource.setPassword("root");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mibd");
+		driverManagerDataSource.setUsername("javagrupo3");
+		driverManagerDataSource.setPassword("grupo3");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/foodtrucksttpsgrupo3?useSSL=false");  
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return driverManagerDataSource;
 	}
