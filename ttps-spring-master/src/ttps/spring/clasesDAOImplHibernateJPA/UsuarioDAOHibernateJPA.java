@@ -30,7 +30,10 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		 String sql = " SELECT u "
 		 			+ " FROM Usuario as u"
 		 			+ " WHERE u.username = :username ";
-		 Query consulta =this.getEntityManager().createQuery(sql);
+		 
+		 System.out.println( "entity = " + this.getEntityManager() );
+		 
+		 Query consulta = this.getEntityManager().createQuery(sql);
 		 consulta.setParameter("username", username);
 		 Usuario resultado = (Usuario)consulta.getSingleResult();
 		 return resultado;

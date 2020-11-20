@@ -21,16 +21,14 @@ public class FoodTruckerDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck
 	 
 	 @Override
 	 public FoodTrucker buscarPorIDdeUsuario(long usuarioID) {
-		EntityManagerFactory emf = new EMFactory().getEMF();
-		EntityManager em = emf.createEntityManager();
 		FoodTrucker resultado = null;
-		
-		 String sql = " SELECT f "
+		 
+		String sql = " SELECT f "
 		 			+ " FROM FoodTrucker as f"
 		 			+ " INNER JOIN Usuario u on (u.id = f.usuario)"
 		 			+ " WHERE u.id = :usuarioID";
 		 
-		 Query consulta = EMFactory.getEMF().createEntityManager().createQuery(sql);
+		 Query consulta =  this.getEntityManager().createQuery(sql);
 		 consulta.setParameter("usuarioID", usuarioID);
 		 List <FoodTrucker> result = consulta.getResultList();
 		 
