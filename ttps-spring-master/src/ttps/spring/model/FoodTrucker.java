@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name="foodtruckers")
 public class FoodTrucker{
@@ -15,8 +17,11 @@ public class FoodTrucker{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="zona_id")
 	private Zona zona;	
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "foodtrucker", cascade = CascadeType.ALL)
 	private List<FoodTruck> foodtrucks = new ArrayList<>();
+	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Usuario usuario;
 	

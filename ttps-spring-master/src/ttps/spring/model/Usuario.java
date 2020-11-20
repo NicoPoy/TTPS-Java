@@ -2,6 +2,8 @@ package ttps.spring.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name="usuarios")
 public class Usuario {	
@@ -19,9 +21,11 @@ public class Usuario {
 	@Column (name = "password", nullable = false)
 	private String password;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
 	private FoodTrucker foodtrucker;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
 	private Organizador organizador;
 	

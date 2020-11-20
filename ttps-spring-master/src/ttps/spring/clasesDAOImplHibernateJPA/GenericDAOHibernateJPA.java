@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import ttps.spring.clasesDAO.GenericDAO;
+import ttps.spring.config.*;
+
 
 @Transactional
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
