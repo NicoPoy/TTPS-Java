@@ -13,18 +13,6 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		super(Usuario.class);
 	 }
 	 
-	private EntityManager entityManager;
-	
-	@PersistenceContext
-		 
-	public void setEntityManager(EntityManager em){
-		this.entityManager = em;
-	 }
-		 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	 }
-	 
 	 @Override
 	 public Usuario buscarPorUsername(String username) {
 		 String sql = " SELECT u "

@@ -2,26 +2,25 @@ package ttps.spring.clasesDAOImplHibernateJPA;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import ttps.spring.clasesDAO.GenericDAO;
 
 @Transactional
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
-	
-	protected Class<T> clasePersistente;	
-	private EntityManager entityManager;
+
+	protected Class<T> clasePersistente;
 	
 	@PersistenceContext
+	private EntityManager entityManager;
 	 
-	public void setEntityManager(EntityManager em){
+/*	public void setEntityManager(EntityManager em){
 		this.entityManager = em;
-	 }
+	 } */
 	 
 	public EntityManager getEntityManager() {
 		return entityManager;
