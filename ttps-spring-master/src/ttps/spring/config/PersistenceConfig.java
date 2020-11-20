@@ -55,7 +55,7 @@ public class PersistenceConfig {
 		Properties properties = new Properties();		
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-		properties.setProperty("hibernate.default_schema", "mibd");
+		properties.setProperty("hibernate.default_schema", "foodtrucksttpsgrupo3");
 		return properties;
 	}
 		
