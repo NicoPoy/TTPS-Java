@@ -11,7 +11,6 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id; 
-	
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
 	@Column (name = "apellido", nullable = false)
@@ -20,15 +19,11 @@ public class Usuario {
 	private String username;
 	@Column (name = "password", nullable = false)
 	private String password;
-	
-	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
 	private FoodTrucker foodtrucker;
-	
-	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
 	private Organizador organizador;
-	
+
 	public Usuario() {
 		super();
 	}

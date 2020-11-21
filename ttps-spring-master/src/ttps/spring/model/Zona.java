@@ -8,10 +8,8 @@ public class Zona {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
-
 
 	public Zona() {
 		super();
@@ -37,6 +35,5 @@ public class Zona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	
-
 
 }

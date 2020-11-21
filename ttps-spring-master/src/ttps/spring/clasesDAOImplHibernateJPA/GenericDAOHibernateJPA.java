@@ -19,7 +19,6 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 	 } 
 	 
 	public EntityManager getEntityManager() {
-		System.out.println( "entity = " + entityManager );
 		return entityManager;
 	 }
 
