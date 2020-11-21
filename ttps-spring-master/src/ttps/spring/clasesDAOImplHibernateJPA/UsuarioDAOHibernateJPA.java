@@ -1,5 +1,7 @@
 package ttps.spring.clasesDAOImplHibernateJPA;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,16 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		 Usuario resultado = (Usuario)consulta.getSingleResult();
 		 return resultado;
 	 }
+
+	@Override
+	public List<Usuario> recuperarTodos() {
+		 String sql = " SELECT u "
+		 			+ " FROM Usuario as u ";		 
+		 Query consulta = getEntityManager().createQuery(sql);
+		 return consulta.getResultList();
+	}
+	 
+	 
 	 
 	 
 }

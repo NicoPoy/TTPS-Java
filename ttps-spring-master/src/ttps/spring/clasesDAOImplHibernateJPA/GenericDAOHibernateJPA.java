@@ -51,11 +51,9 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 		return entity;
 	} 
 
-
 	@Override
 	public T recuperar(Serializable id) {
 		T entity = this.getEntityManager().find(clasePersistente, id);
-		this.getEntityManager().getTransaction().commit();
 		return entity;
 	}
 
