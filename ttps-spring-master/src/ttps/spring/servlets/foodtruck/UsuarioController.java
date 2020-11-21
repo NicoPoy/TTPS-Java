@@ -34,11 +34,13 @@ public class UsuarioController {
 	@PostMapping
 	public ResponseEntity <Usuario> crearUsuario (@RequestBody Usuario user) {
 		Usuario exist = (uDAO.buscarPorUsername(user.getUsername()));
-	    if ( !exist.equals(null) ) {
+	    if ( exist != null ) {
 	    	return new ResponseEntity <Usuario> (user, HttpStatus.CONFLICT);
 	    } else {
+	    	System.out.println("<< Guardando usuario " + user.getUsername() + " >>>");
 	    	uDAO.persistir(user);
-	        return new ResponseEntity <Usuario> (user, HttpStatus.CREATED);
+	    	System.out.println("<--- Usuario guardado --->");
+	    	return new ResponseEntity <Usuario> (user, HttpStatus.CREATED);
 	    }		       
     }
 

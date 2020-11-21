@@ -22,8 +22,11 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		 			+ " WHERE u.username = :username ";		 
 		 Query consulta = getEntityManager().createQuery(sql);
 		 consulta.setParameter("username", username);
-		 Usuario resultado = (Usuario)consulta.getSingleResult();
-		 return resultado;
+		 List <Usuario> resultList = consulta.getResultList();
+		 if( resultList.size() != 0 ) {
+			return (Usuario) resultList.get(0); }
+		 else { System.out.println("<<< No existe usuario con username = " + username + " >>>");
+			 	return null; }
 	 }
 
 	@Override
