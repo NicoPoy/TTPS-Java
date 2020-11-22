@@ -38,7 +38,8 @@ public class PersistenceConfig {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setUsername("javagrupo3");
 		driverManagerDataSource.setPassword("grupo3");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/foodtrucksttpsgrupo3?useSSL=false");  
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/foodtrucksttpsgrupo3?allowPublicKeyRetrieval=true&useSSL=false");
+		//driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/foodtrucksttpsgrupo3?useSSL=false");  
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return driverManagerDataSource;
 	}

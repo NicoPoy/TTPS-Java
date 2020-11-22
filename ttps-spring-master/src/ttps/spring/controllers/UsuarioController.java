@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +54,22 @@ public class UsuarioController {
 		}
 		return new ResponseEntity<Usuario>(user, HttpStatus.OK);
 	 }
-
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Usuario> updateUsuario( @PathVariable("id") long id, @RequestBody Usuario user ){
+		Usuario u = uDAO.recuperar(id);
+		if (user == null) {
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+		} else {
+			u.setApellido(user.getApellido());
+			u.setNombre(user.getNombre());
+			u.setUsername(user.getUsername());
+			u.setPassword(user.getPassword());
+			uDAO.actualizar(u);
+			return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+		}
+	}
 	
 	
 	
