@@ -19,11 +19,7 @@ public class Usuario {
 	private String username;
 	@Column (name = "password", nullable = false)
 	private String password;
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
-	private FoodTrucker foodtrucker;
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "usuario")
-	private Organizador organizador;
-
+	
 	public Usuario() {
 		super();
 	}
@@ -74,22 +70,6 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public FoodTrucker getFoodtrucker() {
-		return foodtrucker;
-	}
-
-	public void setFoodtrucker(FoodTrucker foodtrucker) {
-		this.foodtrucker = foodtrucker;
-	}
-	
-	public Organizador getOrganizador() {
-		return organizador;
-	}
-
-	public void setOrganizador(Organizador organizador) {
-		this.organizador = organizador;
 	}
 	
 }

@@ -7,11 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.clasesDAO.FoodTruckerDAO;
+import ttps.spring.clasesDAO.ZonaDAO;
 import ttps.spring.model.FoodTrucker;
+import ttps.spring.model.Usuario;
+import ttps.spring.model.Zona;
 
 @RestController
 @RequestMapping(value="/foodtruckers", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -19,14 +26,74 @@ import ttps.spring.model.FoodTrucker;
 public class FoodTruckerController {
 
 	@Autowired
-	private FoodTruckerDAO fDAO;	
+	private FoodTruckerDAO fDAO;
+	
+	@Autowired
+	private ZonaDAO zDAO;	
 	
 	@GetMapping
 	public ResponseEntity<List<FoodTrucker>> getFoodTruckers( ){		
 		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();
+		
+		System.out.println( "size = " + foodTruckers.size() );
+		
 		if(foodTruckers.isEmpty()){
 			return new ResponseEntity<List<FoodTrucker>>(HttpStatus.NO_CONTENT);
 		}	
 	    return new ResponseEntity< List<FoodTrucker> > (foodTruckers, HttpStatus.OK);
 	}
+	
+	@PostMapping
+	public ResponseEntity <FoodTrucker> crearFoodTrucker (@RequestBody FoodTrucker user ) {
+		Usuario exist = (fDAO.buscarPorUsername(user.getUsername()));
+		Zona zona = ( zDAO.recuperar( user.getZona().getId() ) );
+		user.setZona(zona); 
+		
+	    if ( exist != null ) {
+	    	return new ResponseEntity <FoodTrucker> (user, HttpStatus.CONFLICT);
+	    } else {
+	    	System.out.println("<< Guardando usuario " + user.getUsername() + " >>>");
+	    	fDAO.persistir(user);
+	    	System.out.println("<--- Usuario guardado --->");
+	    	return new ResponseEntity <FoodTrucker> (user, HttpStatus.CREATED);
+	    }		       
+    }
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<FoodTrucker> getUsuario(@PathVariable("id") long id) {
+		System.out.println("Obteniendo usuario con id " + id);
+		FoodTrucker user = fDAO.recuperar(id);
+		if (user == null) {
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<FoodTrucker>(user, HttpStatus.OK);
+	 }
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<FoodTrucker> updateUsuario( @PathVariable("id") long id, @RequestBody FoodTrucker user ){
+		FoodTrucker u = fDAO.recuperar(id);
+		if (user == null) {
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
+		} else {
+			if ( user.getApellido() != null ) {
+				u.setApellido(user.getApellido());
+			}
+			if ( user.getNombre() != null ) {
+				u.setNombre(user.getNombre());
+			}
+			if ( user.getUsername() != null ) {
+				u.setUsername(user.getUsername());
+			}
+			if ( user.getPassword() != null ) {
+				u.setPassword(user.getPassword());
+			}		
+			fDAO.actualizar(u);
+			return new ResponseEntity<FoodTrucker>(user, HttpStatus.OK);
+		}
+	}
+	
+	
+	
 }

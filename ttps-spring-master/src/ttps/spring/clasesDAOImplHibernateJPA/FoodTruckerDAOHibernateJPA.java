@@ -18,21 +18,6 @@ public class FoodTruckerDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck
 	 public FoodTruckerDAOHibernateJPA() {
 		super(FoodTrucker.class);
 	 }
-	 
-	 @Override
-	 public FoodTrucker buscarPorIDdeUsuario(long usuarioID) {
-		FoodTrucker resultado = null;
-		String sql = " SELECT f "
-		 			+ " FROM FoodTrucker as f"
-		 			+ " INNER JOIN Usuario u on (u.id = f.usuario)"
-		 			+ " WHERE u.id = :usuarioID";
-		 Query consulta =  this.getEntityManager().createQuery(sql);
-		 consulta.setParameter("usuarioID", usuarioID);
-		 List <FoodTrucker> result = consulta.getResultList(); 
-		 if( !result.isEmpty() ) {
-			 resultado = (FoodTrucker)result.get(0); }
-		 return resultado;
-	 }
 
 	@Override
 	public List<FoodTrucker> recuperarTodos() {
@@ -40,6 +25,20 @@ public class FoodTruckerDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck
 	 				+ " FROM FoodTrucker as f ";		 
 	 Query consulta = getEntityManager().createQuery(sql);
 	 return consulta.getResultList();
+	}
+
+	@Override
+	public FoodTrucker buscarPorUsername(String username) {
+		FoodTrucker resultado = null;
+		String sql = " SELECT f "
+		 			+ " FROM FoodTrucker as f"
+		 			+ " WHERE f.username = :username";
+		 Query consulta =  this.getEntityManager().createQuery(sql);
+		 consulta.setParameter("username", username);
+		 List <FoodTrucker> result = consulta.getResultList(); 
+		 if( !result.isEmpty() ) {
+			 resultado = (FoodTrucker)result.get(0); }
+		 return resultado;
 	}
 	 
 }

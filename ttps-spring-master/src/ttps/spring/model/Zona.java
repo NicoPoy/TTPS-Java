@@ -8,6 +8,7 @@ public class Zona {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
 	@Column (name = "nombre", nullable = false)
 	private String nombre;
 

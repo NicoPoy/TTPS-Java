@@ -6,33 +6,17 @@ import javax.persistence.*;
 
 @Entity
 @Table (name="organizadores")
-public class Organizador{	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+public class Organizador extends Usuario{	
 	
 	@OneToMany(mappedBy = "organizador")
 	private List<Evento> eventos = new ArrayList<>();
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Usuario usuario;
-	
+
 	public Organizador() {
 		super();
 	}
 	
 	public Organizador(Usuario usuario) {
 		super();
-		this.usuario = usuario;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public List<Evento> getEventos() {
@@ -43,13 +27,6 @@ public class Organizador{
 		this.eventos = eventos;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	
 }
