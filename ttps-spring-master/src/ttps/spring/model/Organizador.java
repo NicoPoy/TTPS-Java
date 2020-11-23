@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name="organizadores")
 public class Organizador extends Usuario{	
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "organizador")
 	private List<Evento> eventos = new ArrayList<>();
 

@@ -1,5 +1,7 @@
 package ttps.spring.clasesDAOImplHibernateJPA;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -29,6 +31,28 @@ public class OrganizadorDAOHibernateJPA extends GenericDAOHibernateJPA<Organizad
 		 Query consulta = EMFactory.getEMF().createEntityManager().createQuery(sql);
 		 consulta.setParameter("usuarioID", idUsuario);
 		 Organizador resultado = (Organizador)consulta.getSingleResult();
+		 return resultado;
+	}
+
+	@Override
+	public List<Organizador> recuperarTodos() {
+		String sql = " SELECT o "
+ 				   + " FROM Organizador as o ";		 
+		Query consulta = getEntityManager().createQuery(sql);
+		return consulta.getResultList();
+	}
+	
+	@Override
+	public Organizador buscarPorUsername(String username) {
+		Organizador resultado = null;
+		String sql = " SELECT o "
+		 			+ " FROM Organizador as o"
+		 			+ " WHERE o.username = :username";
+		 Query consulta =  this.getEntityManager().createQuery(sql);
+		 consulta.setParameter("username", username);
+		 List <Organizador> result = consulta.getResultList(); 
+		 if( !result.isEmpty() ) {
+			 resultado = (Organizador) result.get(0); }
 		 return resultado;
 	}
 
