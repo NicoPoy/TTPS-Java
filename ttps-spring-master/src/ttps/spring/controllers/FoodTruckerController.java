@@ -1,11 +1,13 @@
 package ttps.spring.controllers;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,10 +35,7 @@ public class FoodTruckerController {
 	
 	@GetMapping
 	public ResponseEntity<List<FoodTrucker>> getFoodTruckers( ){		
-		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();
-		
-		System.out.println( "size = " + foodTruckers.size() );
-		
+		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();		
 		if(foodTruckers.isEmpty()){
 			return new ResponseEntity<List<FoodTrucker>>(HttpStatus.NO_CONTENT);
 		}	
@@ -60,7 +59,7 @@ public class FoodTruckerController {
     }
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<FoodTrucker> getUsuario(@PathVariable("id") long id) {
+	public ResponseEntity<FoodTrucker> getFoodTrucker(@PathVariable("id") long id) {
 		System.out.println("Obteniendo usuario con id " + id);
 		FoodTrucker user = fDAO.recuperar(id);
 		if (user == null) {
@@ -71,9 +70,9 @@ public class FoodTruckerController {
 	 }
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<FoodTrucker> updateUsuario( @PathVariable("id") long id, @RequestBody FoodTrucker user ){
+	public ResponseEntity<FoodTrucker> updateFoodTrucker( @PathVariable("id") long id, @RequestBody FoodTrucker user ){
 		FoodTrucker u = fDAO.recuperar(id);
-		if (user == null) {
+		if (u == null) {
 			System.out.println("Usuario con id " + id + " no encontrado");
 			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
 		} else {
@@ -94,6 +93,33 @@ public class FoodTruckerController {
 		}
 	}
 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<FoodTrucker> deleteFoodTrucker( @PathVariable("id") long id ){
+		boolean existe = fDAO.existe(id);
+		if ( !existe) {
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
+		} else { fDAO.borrar(id);
+				return new ResponseEntity<FoodTrucker>(HttpStatus.NO_CONTENT); }
+	}
 	
+	@DeleteMapping()
+	public ResponseEntity<FoodTrucker> deleteAllFoodTruckers(){
+		System.out.println("<--- Eliminando FoodTruckers --->");
+		
+		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();	
+		ListIterator it = foodTruckers.listIterator();
+		
+		while(it.hasNext()) {
+			FoodTrucker ft = (FoodTrucker) it.next();
+			ft.setZona(null);
+			fDAO.borrar(ft.getId());
+		}
+
+		if ( fDAO.recuperarTodos().size() > 0 ) {
+			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
+		} else { return new ResponseEntity<FoodTrucker>(HttpStatus.NO_CONTENT); }
+		
+	}
 	
 }

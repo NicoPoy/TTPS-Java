@@ -40,6 +40,7 @@ public class FoodTruckerDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck
 			 resultado = (FoodTrucker)result.get(0); }
 		 return resultado;
 	}
+
 	 
 }
 

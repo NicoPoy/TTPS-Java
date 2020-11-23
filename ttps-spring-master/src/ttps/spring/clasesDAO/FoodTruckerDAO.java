@@ -8,5 +8,6 @@ public interface FoodTruckerDAO extends GenericDAO <FoodTrucker> {
 	public List<FoodTrucker> recuperarTodos();
 	public FoodTrucker buscarPorUsername(String username);
 
+
 	
 }
