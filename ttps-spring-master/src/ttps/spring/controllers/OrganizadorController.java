@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.clasesDAO.OrganizadorDAO;
-import ttps.spring.model.FoodTrucker;
 import ttps.spring.model.Organizador;
 import ttps.spring.model.Usuario;
-import ttps.spring.model.Zona;
 
 @RestController
 @RequestMapping(value="/organizadores", produces = MediaType.APPLICATION_JSON_VALUE)

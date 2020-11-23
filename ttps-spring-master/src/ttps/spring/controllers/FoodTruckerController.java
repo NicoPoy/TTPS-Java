@@ -88,8 +88,12 @@ public class FoodTruckerController {
 			if ( user.getPassword() != null ) {
 				u.setPassword(user.getPassword());
 			}		
+			if ( user.getZona() != null ) {
+				Zona zona = ( zDAO.recuperar( user.getZona().getId() ) );
+				user.setZona(zona); 
+			}		
 			fDAO.actualizar(u);
-			return new ResponseEntity<FoodTrucker>(user, HttpStatus.OK);
+			return new ResponseEntity<FoodTrucker>(u, HttpStatus.OK);
 		}
 	}
 	
