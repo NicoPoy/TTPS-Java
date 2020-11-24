@@ -36,6 +36,16 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 	}
 	
 	@Override
+	public List<FoodTruck> recuperarTodos() {
+		
+		String sql = " SELECT ft "
+				 	+ " FROM FoodTruck ft";
+		 
+		Query consulta = getEntityManager().createQuery(sql);	 
+		return consulta.getResultList();
+	}
+	
+	@Override
 	public FoodTruck encontrarPorNombre(String nombre) {
 		EntityManagerFactory emf = new EMFactory().getEMF();
 		EntityManager em = emf.createEntityManager();
