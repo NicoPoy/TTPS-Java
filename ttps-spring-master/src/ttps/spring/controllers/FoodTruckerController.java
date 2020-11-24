@@ -107,7 +107,7 @@ public class FoodTruckerController {
 				return new ResponseEntity<FoodTrucker>(HttpStatus.NO_CONTENT); }
 	}
 	
-	@DeleteMapping()
+	@DeleteMapping
 	public ResponseEntity<FoodTrucker> deleteAllFoodTruckers(){
 		System.out.println("<--- Eliminando FoodTruckers --->");
 		
