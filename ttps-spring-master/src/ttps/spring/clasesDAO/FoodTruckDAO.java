@@ -6,6 +6,7 @@ import ttps.spring.model.*;
 public interface FoodTruckDAO extends GenericDAO<FoodTruck> {
 
 	public List<FoodTruck> encontrarTodosParaUsuarioID(long usuarioID);
+	public List<FoodTruck> recuperarTodos();
 	public FoodTruck encontrarPorNombre(String nombre);
 	/*public FoodTrucker devolverFoodTrucker();
 	public List<TipoDeServicio> devolverTipos();
