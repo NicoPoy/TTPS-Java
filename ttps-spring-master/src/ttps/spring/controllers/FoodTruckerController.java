@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,8 +35,8 @@ public class FoodTruckerController {
 	private ZonaDAO zDAO;	
 	
 	@GetMapping
-	public ResponseEntity<List<FoodTrucker>> getFoodTruckers( ){		
-		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();		
+	public ResponseEntity<List<FoodTrucker>> getFoodTruckers( @RequestHeader String token ){		
+		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();
 		if(foodTruckers.isEmpty()){
 			return new ResponseEntity<List<FoodTrucker>>(HttpStatus.NO_CONTENT);
 		}	
@@ -70,31 +71,36 @@ public class FoodTruckerController {
 	 }
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<FoodTrucker> updateFoodTrucker( @PathVariable("id") long id, @RequestBody FoodTrucker user ){
+	public ResponseEntity<FoodTrucker> updateFoodTrucker( @PathVariable("id") long id, @RequestBody FoodTrucker user, @RequestHeader String token ){
 		FoodTrucker u = fDAO.recuperar(id);
-		if (u == null) {
-			System.out.println("Usuario con id " + id + " no encontrado");
-			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
-		} else {
-			if ( user.getApellido() != null ) {
+		
+		if (u != null) {
+			if ( !token.equals(u.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED);
+			} else {
+				if ( user.getApellido() != null ) {
 				u.setApellido(user.getApellido());
-			}
-			if ( user.getNombre() != null ) {
-				u.setNombre(user.getNombre());
-			}
-			if ( user.getUsername() != null ) {
-				u.setUsername(user.getUsername());
-			}
-			if ( user.getPassword() != null ) {
-				u.setPassword(user.getPassword());
-			}		
-			if ( user.getZona() != null ) {
-				Zona zona = ( zDAO.recuperar( user.getZona().getId() ) );
-				user.setZona(zona); 
-			}		
-			fDAO.actualizar(u);
-			return new ResponseEntity<FoodTrucker>(u, HttpStatus.OK);
-		}
+				}
+				if ( user.getNombre() != null ) {
+					u.setNombre(user.getNombre());
+				}
+				if ( user.getUsername() != null ) {
+					u.setUsername(user.getUsername());
+				}
+				if ( user.getPassword() != null ) {
+					u.setPassword(user.getPassword());
+				}		
+				if ( user.getZona() != null ) {
+					Zona zona = ( zDAO.recuperar( user.getZona().getId() ) );
+					user.setZona(zona); 
+				}		
+				fDAO.actualizar(u);
+				return new ResponseEntity<FoodTrucker>(u, HttpStatus.OK);	
+			}	
+		} else {	
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND); } 	
 	}
 	
 	@DeleteMapping("/{id}")

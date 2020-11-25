@@ -7,5 +7,5 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 
 	 public Usuario buscarPorUsername(String username);
 	 public List <Usuario> recuperarTodos();
-	 public boolean login (String username, String password);
+	 public Usuario login (String username, String password);
 }
