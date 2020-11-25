@@ -1,6 +1,8 @@
 package ttps.spring.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.clasesDAO.FoodTruckDAO;
 import ttps.spring.clasesDAO.FoodTruckerDAO;
+import ttps.spring.clasesDAO.TipoDeServicioDAO;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.FoodTrucker;
+import ttps.spring.model.TipoDeServicio;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.Usuario;
 
@@ -29,6 +33,8 @@ public class FoodTruckController {
 	private FoodTruckDAO ftDAO;
 	@Autowired
 	private FoodTruckerDAO ftrDAO;
+	@Autowired
+	private TipoDeServicioDAO tsDAO;
 	
 	@GetMapping
 	public ResponseEntity<List<FoodTruck>> getFoodTruckers( ){		
@@ -42,20 +48,25 @@ public class FoodTruckController {
 	@PostMapping("/{id}")
 	public ResponseEntity <FoodTruck> crearFoodTruck (@RequestBody FoodTruck foodtruck, @PathVariable("id") long id) {
 		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
-	    foodtruck.setFoodtrucker(foodtrucker);
-	    
-	    
-	    
-	    System.out.println(foodtruck.getTipos().size());
-	    
-	    
-	    
-	    
+	    foodtruck.setFoodtrucker(foodtrucker);    
+	    ListIterator it = foodtruck.getTipos().listIterator();
+	    List<TipoDeServicio> tipos = new ArrayList();
+		while(it.hasNext()) {	
+			TipoDeServicio ts = (TipoDeServicio) it.next(); 
+			System.out.println( " << Buscando servicio con ID = " + ts.getId() );
+			TipoDeServicio persistido = tsDAO.recuperar( ts.getId() );
+			System.out.println( "Se encontro el servicio = " + ts.getNombre() );
+			tipos.add(persistido);
+		}	
+		foodtruck.setTipos(null);
 		if ( foodtrucker == null ) {
 	    	return new ResponseEntity <FoodTruck> (foodtruck, HttpStatus.CONFLICT);
 	    } else {
-	    	ftDAO.persistir(foodtruck);
-	    	return new ResponseEntity <FoodTruck> (foodtruck, HttpStatus.CREATED);
+		    	ftDAO.persistir(foodtruck);    	
+		    	foodtruck.setTipos(tipos);
+		    	ftDAO.actualizar(foodtruck);
+		    	System.out.println( " <<-- FoodTruck creado -->> " );
+		    	return new ResponseEntity <FoodTruck> (foodtruck, HttpStatus.CREATED);
 	    }		       
     }
 	
