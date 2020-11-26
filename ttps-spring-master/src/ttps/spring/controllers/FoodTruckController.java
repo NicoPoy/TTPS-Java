@@ -49,10 +49,26 @@ public class FoodTruckController {
 		}
 		return new ResponseEntity<List<FoodTruck>>(FoodTrucks, HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<List<FoodTruck>> getFoodTruckParaUsuario( @PathVariable("id") long id, @RequestHeader String token ){	
+		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
+		if (foodtrucker != null) {
+			if (!token.equals(foodtrucker.getId() + "123456")) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<List<FoodTruck>>(HttpStatus.UNAUTHORIZED);
+			} else {
+				System.out.println("<<-- Buscando FoodTrucks para el usuario " + foodtrucker.getUsername() + " -->>");
+				List<FoodTruck> foodTrucks = ftDAO.encontrarTodosParaUsuarioID(foodtrucker.getId());
+				System.out.println("< Se encontraron " + foodTrucks.size() + " >");
+				return new ResponseEntity<List<FoodTruck>>(foodTrucks, HttpStatus.OK);
+			}
+		} else {  System.out.println("!!-- No se encontro el usuario con id " + id + " --!!");
+				  return new ResponseEntity<List<FoodTruck>>(HttpStatus.OK); }
+	}
+	
 	@PostMapping("/{id}")
-	public ResponseEntity<FoodTruck> crearFoodTruck(@RequestBody FoodTruck foodtruck, @PathVariable("id") long id,
-			@RequestHeader String token) {
+	public ResponseEntity<FoodTruck> crearFoodTruck(@RequestBody FoodTruck foodtruck, @PathVariable("id") long id, @RequestHeader String token) {
 		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
 		if (foodtrucker != null) {
 			if (!token.equals(foodtrucker.getId() + "123456")) {
@@ -69,7 +85,6 @@ public class FoodTruckController {
 					System.out.println("Se encontro el servicio = " + ts.getNombre());
 					tipos.add(persistido);
 				}
-
 				foodtruck.setTipos(null);
 				ftDAO.persistir(foodtruck);
 				foodtruck.setTipos(tipos);
@@ -84,8 +99,7 @@ public class FoodTruckController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<FoodTruck> updateFoodTruck(@PathVariable("id") long id, @RequestBody FoodTruck foodtruck,
-			@RequestHeader String token) {
+	public ResponseEntity<FoodTruck> updateFoodTruck(@PathVariable("id") long id, @RequestBody FoodTruck foodtruck, @RequestHeader String token) {
 		FoodTruck foodt = ftDAO.recuperar(id);
 		if (foodt != null) {
 			if (!token.equals(foodt.getFoodtrucker().getId() + "123456")) {
