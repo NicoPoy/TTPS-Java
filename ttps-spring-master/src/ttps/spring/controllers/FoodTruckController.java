@@ -59,9 +59,16 @@ public class FoodTruckController {
 				return new ResponseEntity<List<FoodTruck>>(HttpStatus.UNAUTHORIZED);
 			} else {
 				System.out.println("<<-- Buscando FoodTrucks para el usuario " + foodtrucker.getUsername() + " -->>");
-				List<FoodTruck> foodTrucks = ftDAO.encontrarTodosParaUsuarioID(foodtrucker.getId());
-				System.out.println("< Se encontraron " + foodTrucks.size() + " >");
-				return new ResponseEntity<List<FoodTruck>>(foodTrucks, HttpStatus.OK);
+				List<FoodTruck> foodTrucks = ftDAO.encontrarTodosParaUsuarioID(foodtrucker.getId());				
+				ListIterator it = foodTrucks.listIterator();
+				List<FoodTruck> resultadoFoodTrucks = new ArrayList();
+				while (it.hasNext()) {
+					FoodTruck ft = (FoodTruck) it.next();
+					ft.setTipos( tsDAO.encontrarTodosParaFoodtrucker( ft.getId() ) );
+					resultadoFoodTrucks.add(ft);
+				}		
+				System.out.println("< Se encontraron " +resultadoFoodTrucks.size() + " >");
+				return new ResponseEntity<List<FoodTruck>>(resultadoFoodTrucks, HttpStatus.OK);
 			}
 		} else {  System.out.println("!!-- No se encontro el usuario con id " + id + " --!!");
 				  return new ResponseEntity<List<FoodTruck>>(HttpStatus.OK); }

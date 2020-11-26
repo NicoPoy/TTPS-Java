@@ -20,12 +20,11 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 
 	@Override
 	public List<FoodTruck> encontrarTodosParaUsuarioID(long usuarioID) {
-		String sql = " SELECT ft "
+		String sql =  " SELECT ft "
 				 	+ " FROM FoodTruck ft"
 				 	+ "		INNER JOIN FoodTrucker uft ON (ft.foodtrucker = uft.id )"
 				 	+ " 	INNER JOIN Usuario u ON (u.id = ft.foodtrucker)"
 		 			+ " WHERE u.id = :usuarioID ";
-		 
 		Query consulta = getEntityManager().createQuery(sql);
 		consulta.setParameter("usuarioID", usuarioID);		 
 		List<FoodTruck> resultado = consulta.getResultList();	 
@@ -33,11 +32,9 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 	}
 	
 	@Override
-	public List<FoodTruck> recuperarTodos() {
-		
+	public List<FoodTruck> recuperarTodos() {		
 		String sql = " SELECT ft "
-				 	+ " FROM FoodTruck ft";
-		 
+				 	+ " FROM FoodTruck ft";	 
 		Query consulta = getEntityManager().createQuery(sql);	 
 		return consulta.getResultList();
 	}
@@ -56,7 +53,5 @@ public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> 
 		 FoodTruck resultado = (FoodTruck) consulta.getSingleResult();
 		 return resultado;
 	}
-
-	
 	
 }

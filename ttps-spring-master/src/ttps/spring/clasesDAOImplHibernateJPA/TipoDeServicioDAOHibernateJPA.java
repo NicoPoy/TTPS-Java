@@ -45,6 +45,17 @@ public class TipoDeServicioDAOHibernateJPA extends GenericDAOHibernateJPA<TipoDe
 		 TipoDeServicio resultado = (TipoDeServicio)consulta.getSingleResult();
 		 return resultado;
 	}
+
+	@Override
+	public List<TipoDeServicio> encontrarTodosParaFoodtrucker(long idFoodTruck) {
+	String sql = " SELECT ft.tipos "
+				+ " FROM FoodTruck ft"
+	 			+ " WHERE ft.id = :idFoodTruck ";
+	 
+	 Query consulta = getEntityManager().createQuery(sql);
+	 consulta.setParameter("idFoodTruck", idFoodTruck);
+	 return consulta.getResultList();
+	}
 	
 	
 
