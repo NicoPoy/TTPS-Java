@@ -42,8 +42,7 @@ public class OrganizadorController {
 	
 	@PostMapping
 	public ResponseEntity <Organizador> crearOrganizador (@RequestBody Organizador user ) {
-		Usuario exist = (oDAO.buscarPorUsername(user.getUsername()));
-		
+		Usuario exist = (oDAO.buscarPorUsername(user.getUsername()));	
 	    if ( exist != null ) {
 	    	return new ResponseEntity <Organizador> (user, HttpStatus.CONFLICT);
 	    } else {

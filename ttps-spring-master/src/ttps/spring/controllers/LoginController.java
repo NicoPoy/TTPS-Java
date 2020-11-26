@@ -32,7 +32,7 @@ public class LoginController {
 				return new ResponseEntity<String> (header, HttpStatus.OK);
 			} else if ( u.esOrganizador() ) {
 				header.set("tipo", "Organizador");
-				return new ResponseEntity<String> ("Logeado como Organizador", HttpStatus.OK);
+				return new ResponseEntity<String> (header, HttpStatus.OK);
 			} else { return new ResponseEntity<String> (header, HttpStatus.NO_CONTENT); }
 		}
 		return  new ResponseEntity<String> ("Usuario o contraseña incorrectos", HttpStatus.NO_CONTENT);
