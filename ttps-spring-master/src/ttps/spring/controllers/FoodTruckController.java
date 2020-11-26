@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,13 +23,14 @@ import ttps.spring.clasesDAO.FoodTruckerDAO;
 import ttps.spring.clasesDAO.TipoDeServicioDAO;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.FoodTrucker;
+import ttps.spring.model.Organizador;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.TipoDeServicio;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.Usuario;
 
 @RestController
-@RequestMapping(value="/foodtrucks", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/foodtrucks", produces = MediaType.APPLICATION_JSON_VALUE)
 
 public class FoodTruckController {
 
@@ -38,107 +40,131 @@ public class FoodTruckController {
 	private FoodTruckerDAO ftrDAO;
 	@Autowired
 	private TipoDeServicioDAO tsDAO;
-	
+
 	@GetMapping
-	public ResponseEntity<List<FoodTruck>> getFoodTruckers( ){		
-		List< FoodTruck > FoodTrucks = ftDAO.recuperarTodos();		
-		if(FoodTrucks.isEmpty()){
+	public ResponseEntity<List<FoodTruck>> getFoodTruckers() {
+		List<FoodTruck> FoodTrucks = ftDAO.recuperarTodos();
+		if (FoodTrucks.isEmpty()) {
 			return new ResponseEntity<List<FoodTruck>>(HttpStatus.NO_CONTENT);
-		}	
-	    return new ResponseEntity< List<FoodTruck> > (FoodTrucks, HttpStatus.OK);
+		}
+		return new ResponseEntity<List<FoodTruck>>(FoodTrucks, HttpStatus.OK);
 	}
 
 	@PostMapping("/{id}")
-	public ResponseEntity <FoodTruck> crearFoodTruck (@RequestBody FoodTruck foodtruck, @PathVariable("id") long id) {
+	public ResponseEntity<FoodTruck> crearFoodTruck(@RequestBody FoodTruck foodtruck, @PathVariable("id") long id,
+			@RequestHeader String token) {
 		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
-	    foodtruck.setFoodtrucker(foodtrucker);    
-	    ListIterator it = foodtruck.getTipos().listIterator();
-	    List<TipoDeServicio> tipos = new ArrayList();
-		while(it.hasNext()) {	
-			TipoDeServicio ts = (TipoDeServicio) it.next(); 
-			System.out.println( " << Buscando servicio con ID = " + ts.getId() );
-			TipoDeServicio persistido = tsDAO.recuperar( ts.getId() );
-			System.out.println( "Se encontro el servicio = " + ts.getNombre() );
-			tipos.add(persistido);
-		}	
-		foodtruck.setTipos(null);
-		if ( foodtrucker == null ) {
-	    	return new ResponseEntity <FoodTruck> (foodtruck, HttpStatus.CONFLICT);
-	    } else {
-		    	ftDAO.persistir(foodtruck);    	
-		    	foodtruck.setTipos(tipos);
-		    	ftDAO.actualizar(foodtruck);
-		    	System.out.println( " <<-- FoodTruck creado -->> " );
-		    	return new ResponseEntity <FoodTruck> (foodtruck, HttpStatus.CREATED);
-	    }		       
-    }
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<FoodTruck> updateFoodTruck( @PathVariable("id") long id, @RequestBody FoodTruck foodtruck ){
-		FoodTruck ft = ftDAO.recuperar(id);
-		if (ft == null) {
-			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+		if (foodtrucker != null) {
+			if (!token.equals(foodtrucker.getId() + "123456")) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
+			} else {
+				foodtruck.setFoodtrucker(foodtrucker);
+				ListIterator it = foodtruck.getTipos().listIterator();
+				List<TipoDeServicio> tipos = new ArrayList();
+				while (it.hasNext()) {
+					TipoDeServicio ts = (TipoDeServicio) it.next();
+					System.out.println(" << Buscando servicio con ID = " + ts.getId());
+					TipoDeServicio persistido = tsDAO.recuperar(ts.getId());
+					System.out.println("Se encontro el servicio = " + ts.getNombre());
+					tipos.add(persistido);
+				}
+
+				foodtruck.setTipos(null);
+				ftDAO.persistir(foodtruck);
+				foodtruck.setTipos(tipos);
+				ftDAO.actualizar(foodtruck);
+				System.out.println(" <<-- FoodTruck creado -->> ");
+				return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.CREATED);
+
+			}
 		} else {
-			if ( foodtruck.getNombre() != null ) {
-				ft.setNombre(foodtruck.getNombre());
-			}
-			if ( foodtruck.getDescripcion() != null ) {
-				ft.setDescripcion(foodtruck.getDescripcion());
-			}
-			if ( foodtruck.getUrl() != null ) {
-				ft.setUrl(foodtruck.getUrl());
-			}
-			if ( foodtruck.getWhatsapp() != null ) {
-				ft.setWhatsapp(foodtruck.getWhatsapp());
-			}
-			if ( foodtruck.getInstagram() != null ) {
-				ft.setInstagram(foodtruck.getInstagram());
-			}		
-			if ( foodtruck.getTwitter() != null ) {
-				ft.setTwitter(foodtruck.getTwitter());
-			}
-			if ( foodtruck.getTipos() != null ) {
-				
-				 ListIterator it = foodtruck.getTipos().listIterator();
-				    List<TipoDeServicio> tipos = new ArrayList();
-					while(it.hasNext()) {	
-						TipoDeServicio ts = (TipoDeServicio) it.next(); 
-						System.out.println( " << Buscando servicio con ID = " + ts.getId() );
-						TipoDeServicio persistido = tsDAO.recuperar( ts.getId() );
-						System.out.println( "Se encontro el servicio = " + persistido.getNombre() );
-						tipos.add(persistido);
-					}	
-				
-				ft.setTipos(tipos);
-			}
-			ftDAO.actualizar(ft);
-			return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.OK);
+			return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	@PutMapping("/{id}")
+	public ResponseEntity<FoodTruck> updateFoodTruck(@PathVariable("id") long id, @RequestBody FoodTruck foodtruck,
+			@RequestHeader String token) {
+		FoodTruck foodt = ftDAO.recuperar(id);
+		if (foodt != null) {
+			if (!token.equals(foodt.getFoodtrucker().getId() + "123456")) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
+			} else {
+				FoodTruck ft = ftDAO.recuperar(id);
+				if (ft == null) {
+					return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+				} else {
+					if (foodtruck.getNombre() != null) {
+						ft.setNombre(foodtruck.getNombre());
+					}
+					if (foodtruck.getDescripcion() != null) {
+						ft.setDescripcion(foodtruck.getDescripcion());
+					}
+					if (foodtruck.getUrl() != null) {
+						ft.setUrl(foodtruck.getUrl());
+					}
+					if (foodtruck.getWhatsapp() != null) {
+						ft.setWhatsapp(foodtruck.getWhatsapp());
+					}
+					if (foodtruck.getInstagram() != null) {
+						ft.setInstagram(foodtruck.getInstagram());
+					}
+					if (foodtruck.getTwitter() != null) {
+						ft.setTwitter(foodtruck.getTwitter());
+					}
+					if (foodtruck.getTipos() != null) {
+
+						ListIterator it = foodtruck.getTipos().listIterator();
+						List<TipoDeServicio> tipos = new ArrayList();
+						while (it.hasNext()) {
+							TipoDeServicio ts = (TipoDeServicio) it.next();
+							System.out.println(" << Buscando servicio con ID = " + ts.getId());
+							TipoDeServicio persistido = tsDAO.recuperar(ts.getId());
+							System.out.println("Se encontro el servicio = " + persistido.getNombre());
+							tipos.add(persistido);
+						}
+
+						ft.setTipos(tipos);
+					}
+					ftDAO.actualizar(ft);
+					return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.OK);
+				}
+			}
+		} else {
+			return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<FoodTruck> deleteFoodTruck( @PathVariable("id") long id ){
-		boolean existe = ftDAO.existe(id);
-		if ( !existe) {
+	public ResponseEntity<FoodTruck> deleteFoodTruck(@PathVariable("id") long id, @RequestHeader String token) {
+		FoodTruck foodt = ftDAO.recuperar(id);
+		if (foodt != null) {
+			if (!token.equals(foodt.getFoodtrucker().getId() + "123456")) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
+			} else {
+				boolean existe = ftDAO.existe(id);
+				if (!existe) {
+					return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+				} else {
+					ftDAO.borrar(id);
+					return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT);
+				}
+			}
+		} else {
 			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
-		} else { ftDAO.borrar(id);
-				return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT); }
-	}
-	
-	/*@DeleteMapping
-	public ResponseEntity<FoodTruck> deleteAllFoodTrucks(){
-		List <FoodTruck> foodtrucks = ftDAO.recuperarTodos();	
-		ListIterator it = foodtrucks.listIterator();
-		while(it.hasNext()) {
-			FoodTruck ft = (FoodTruck) it.next();
-			ftDAO.borrar(ft.getId());
 		}
-		if ( ftDAO.recuperarTodos().size() > 0 ) {
-			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
-		} else { return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT); }
-	}*/
-		
+	}
+
+	/*
+	 * @DeleteMapping public ResponseEntity<FoodTruck> deleteAllFoodTrucks(){ List
+	 * <FoodTruck> foodtrucks = ftDAO.recuperarTodos(); ListIterator it =
+	 * foodtrucks.listIterator(); while(it.hasNext()) { FoodTruck ft = (FoodTruck)
+	 * it.next(); ftDAO.borrar(ft.getId()); } if ( ftDAO.recuperarTodos().size() > 0
+	 * ) { return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND); } else {
+	 * return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT); } }
+	 */
+
 }
-
-	
-
