@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ import ttps.spring.clasesDAO.FoodTruckerDAO;
 import ttps.spring.clasesDAO.TipoDeServicioDAO;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.FoodTrucker;
+import ttps.spring.model.FoodTruck;
 import ttps.spring.model.TipoDeServicio;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.Usuario;
@@ -70,4 +73,72 @@ public class FoodTruckController {
 	    }		       
     }
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<FoodTruck> updateFoodTruck( @PathVariable("id") long id, @RequestBody FoodTruck foodtruck ){
+		FoodTruck ft = ftDAO.recuperar(id);
+		if (ft == null) {
+			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+		} else {
+			if ( foodtruck.getNombre() != null ) {
+				ft.setNombre(foodtruck.getNombre());
+			}
+			if ( foodtruck.getDescripcion() != null ) {
+				ft.setDescripcion(foodtruck.getDescripcion());
+			}
+			if ( foodtruck.getUrl() != null ) {
+				ft.setUrl(foodtruck.getUrl());
+			}
+			if ( foodtruck.getWhatsapp() != null ) {
+				ft.setWhatsapp(foodtruck.getWhatsapp());
+			}
+			if ( foodtruck.getInstagram() != null ) {
+				ft.setInstagram(foodtruck.getInstagram());
+			}		
+			if ( foodtruck.getTwitter() != null ) {
+				ft.setTwitter(foodtruck.getTwitter());
+			}
+			if ( foodtruck.getTipos() != null ) {
+				
+				 ListIterator it = foodtruck.getTipos().listIterator();
+				    List<TipoDeServicio> tipos = new ArrayList();
+					while(it.hasNext()) {	
+						TipoDeServicio ts = (TipoDeServicio) it.next(); 
+						System.out.println( " << Buscando servicio con ID = " + ts.getId() );
+						TipoDeServicio persistido = tsDAO.recuperar( ts.getId() );
+						System.out.println( "Se encontro el servicio = " + persistido.getNombre() );
+						tipos.add(persistido);
+					}	
+				
+				ft.setTipos(tipos);
+			}
+			ftDAO.actualizar(ft);
+			return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.OK);
+		}
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<FoodTruck> deleteFoodTruck( @PathVariable("id") long id ){
+		boolean existe = ftDAO.existe(id);
+		if ( !existe) {
+			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+		} else { ftDAO.borrar(id);
+				return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT); }
+	}
+	
+	/*@DeleteMapping
+	public ResponseEntity<FoodTruck> deleteAllFoodTrucks(){
+		List <FoodTruck> foodtrucks = ftDAO.recuperarTodos();	
+		ListIterator it = foodtrucks.listIterator();
+		while(it.hasNext()) {
+			FoodTruck ft = (FoodTruck) it.next();
+			ftDAO.borrar(ft.getId());
+		}
+		if ( ftDAO.recuperarTodos().size() > 0 ) {
+			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
+		} else { return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT); }
+	}*/
+		
 }
+
+	
+
