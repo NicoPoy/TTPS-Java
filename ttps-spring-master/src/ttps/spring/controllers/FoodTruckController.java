@@ -42,12 +42,22 @@ public class FoodTruckController {
 	private TipoDeServicioDAO tsDAO;
 
 	@GetMapping
-	public ResponseEntity<List<FoodTruck>> getFoodTruckers() {
+	public ResponseEntity<List<FoodTruck>> getFoodTruck() {
 		List<FoodTruck> FoodTrucks = ftDAO.recuperarTodos();
 		if (FoodTrucks.isEmpty()) {
 			return new ResponseEntity<List<FoodTruck>>(HttpStatus.NO_CONTENT);
+		} else {
+			ListIterator it = FoodTrucks.listIterator();
+			List<FoodTruck> resultadoFoodTrucks = new ArrayList();
+			while (it.hasNext()) {
+				FoodTruck ft = (FoodTruck) it.next();
+				ft.setTipos( tsDAO.encontrarTodosParaFoodtrucker( ft.getId() ) );
+				resultadoFoodTrucks.add(ft);
+			}		
+			System.out.println("< Se encontraron " +resultadoFoodTrucks.size() + " >");
+			return new ResponseEntity<List<FoodTruck>>(resultadoFoodTrucks, HttpStatus.OK);
 		}
-		return new ResponseEntity<List<FoodTruck>>(FoodTrucks, HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -98,7 +108,6 @@ public class FoodTruckController {
 				ftDAO.actualizar(foodtruck);
 				System.out.println(" <<-- FoodTruck creado -->> ");
 				return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.CREATED);
-
 			}
 		} else {
 			return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.NOT_FOUND);
@@ -136,7 +145,6 @@ public class FoodTruckController {
 						ft.setTwitter(foodtruck.getTwitter());
 					}
 					if (foodtruck.getTipos() != null) {
-
 						ListIterator it = foodtruck.getTipos().listIterator();
 						List<TipoDeServicio> tipos = new ArrayList();
 						while (it.hasNext()) {
@@ -146,7 +154,6 @@ public class FoodTruckController {
 							System.out.println("Se encontro el servicio = " + persistido.getNombre());
 							tipos.add(persistido);
 						}
-
 						ft.setTipos(tipos);
 					}
 					ftDAO.actualizar(ft);
@@ -170,7 +177,10 @@ public class FoodTruckController {
 				if (!existe) {
 					return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
 				} else {
+					foodt.setTipos(null);
+					ftDAO.actualizar(foodt);
 					ftDAO.borrar(id);
+					System.out.println(" <<< Foodtruck " + foodt.getNombre() + " eliminado >>> ");
 					return new ResponseEntity<FoodTruck>(HttpStatus.NO_CONTENT);
 				}
 			}

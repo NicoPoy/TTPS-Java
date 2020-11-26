@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.FoodTruckDAO;
 
 @Repository
-public class FoodTruckDAOHibernateJPA extends GenericDAOHibernateJPA<FoodTruck> implements FoodTruckDAO{
+public class FoodTruckDAOImpl extends GenericDAOImpl<FoodTruck> implements FoodTruckDAO{
 	 
-	public FoodTruckDAOHibernateJPA() {
+	public FoodTruckDAOImpl() {
 		super(FoodTruck.class);
 	 }
 

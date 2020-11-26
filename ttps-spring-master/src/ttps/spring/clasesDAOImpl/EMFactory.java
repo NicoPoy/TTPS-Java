@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.TipoDeServicioDAO;
 
 @Repository
-public class TipoDeServicioDAOHibernateJPA extends GenericDAOHibernateJPA<TipoDeServicio> implements TipoDeServicioDAO{
+public class TipoDeServicioDAOImpl extends GenericDAOImpl<TipoDeServicio> implements TipoDeServicioDAO{
 	 
-	public TipoDeServicioDAOHibernateJPA() {
+	public TipoDeServicioDAOImpl() {
 		super(TipoDeServicio.class);
 	 }
 

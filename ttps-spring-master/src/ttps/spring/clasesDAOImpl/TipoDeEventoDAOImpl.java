@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +10,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.TipoDeEventoDAO;
 
 @Repository
-public class TipoDeEventoDAOHibernateJPA extends GenericDAOHibernateJPA<TipoDeEvento> implements TipoDeEventoDAO{
+public class TipoDeEventoDAOImpl extends GenericDAOImpl<TipoDeEvento> implements TipoDeEventoDAO{
 	 
-	public TipoDeEventoDAOHibernateJPA() {
+	public TipoDeEventoDAOImpl() {
 		super(TipoDeEvento.class);
 	 }
 	

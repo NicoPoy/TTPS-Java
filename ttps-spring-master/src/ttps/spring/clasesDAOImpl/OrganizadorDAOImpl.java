@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.OrganizadorDAO;
 
 @Repository
-public class OrganizadorDAOHibernateJPA extends GenericDAOHibernateJPA<Organizador> implements OrganizadorDAO{
+public class OrganizadorDAOImpl extends GenericDAOImpl<Organizador> implements OrganizadorDAO{
 	 
-	public OrganizadorDAOHibernateJPA() {
+	public OrganizadorDAOImpl() {
 		super(Organizador.class);
 	 }
 

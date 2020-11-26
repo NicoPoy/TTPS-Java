@@ -2,45 +2,45 @@ package ttps.spring.clasesDAO;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import ttps.spring.clasesDAOImplHibernateJPA.*;
+import ttps.spring.clasesDAOImpl.*;
 
 @Transactional
 public class DAOFactory {
 
 	public static UsuarioDAO getUsuarioDAO(){
-			return new UsuarioDAOHibernateJPA();
+			return new UsuarioDAOImpl();
 		}
 		
 	public static ContratacionDAO getContratacionDAO(){
-			return new ContratacionDAOHibernateJPA();
+			return new ContratacionDAOImpl();
 		}
 	
 	public static EventoDAO getEventoDAO(){
-			return new EventoDAOHibernateJPA();
+			return new EventoDAOImpl();
 		}
 	
 	public static FoodTruckDAO getFoodTruckDAO(){
-			return new FoodTruckDAOHibernateJPA();
+			return new FoodTruckDAOImpl();
 		}
 	
 	public static FoodTruckerDAO getFoodTruckerDAO(){
-			return new FoodTruckerDAOHibernateJPA();
+			return new FoodTruckerDAOImpl();
 		}
 	
 	public static OrganizadorDAO getOrganizadorDAO(){
-			return new OrganizadorDAOHibernateJPA();
+			return new OrganizadorDAOImpl();
 		}
 	
 	public static TipoDeEventoDAO getTipoDeEventoDAO(){
-			return new TipoDeEventoDAOHibernateJPA();
+			return new TipoDeEventoDAOImpl();
 		}
 	
 	public static TipoDeServicioDAO getTipoDeServicioDAO(){
-			return new TipoDeServicioDAOHibernateJPA();
+			return new TipoDeServicioDAOImpl();
 		}
 	
 	public static ZonaDAO getZonaDAO(){
-			return new ZonaDAOHibernateJPA();
+			return new ZonaDAOImpl();
 		}
 	
 }

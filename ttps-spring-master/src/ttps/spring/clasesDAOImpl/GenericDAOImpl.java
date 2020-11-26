@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,7 +8,7 @@ import ttps.spring.config.*;
 
 
 @Transactional
-public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
+public class GenericDAOImpl<T> implements GenericDAO<T>{
 
 	protected Class<T> clasePersistente;
 	private EntityManager entityManager;
@@ -22,7 +22,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T>{
 		return entityManager;
 	 }
 
-	public GenericDAOHibernateJPA(Class<T> clase) {
+	public GenericDAOImpl(Class<T> clase) {
 		clasePersistente = clase;
 	}
 

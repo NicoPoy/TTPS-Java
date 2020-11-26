@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +10,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.ZonaDAO;
 
 @Repository
-public class ZonaDAOHibernateJPA extends GenericDAOHibernateJPA<Zona> implements ZonaDAO{
+public class ZonaDAOImpl extends GenericDAOImpl<Zona> implements ZonaDAO{
 	 
-	public ZonaDAOHibernateJPA() {
+	public ZonaDAOImpl() {
 		super(Zona.class);
 	 }
 	

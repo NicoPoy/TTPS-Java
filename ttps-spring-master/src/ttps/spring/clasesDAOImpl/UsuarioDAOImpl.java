@@ -1,4 +1,4 @@
-package ttps.spring.clasesDAOImplHibernateJPA;
+package ttps.spring.clasesDAOImpl;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import ttps.spring.model.*;
 import ttps.spring.clasesDAO.UsuarioDAO;
 
 @Repository
-public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> implements UsuarioDAO{
+public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO{
 
-	 public UsuarioDAOHibernateJPA() {
+	 public UsuarioDAOImpl() {
 		super(Usuario.class);
 	 }
 	 
