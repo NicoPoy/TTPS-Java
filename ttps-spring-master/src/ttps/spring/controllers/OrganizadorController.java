@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.clasesDAO.OrganizadorDAO;
+import ttps.spring.model.FoodTrucker;
 import ttps.spring.model.Organizador;
 import ttps.spring.model.Usuario;
+import ttps.spring.model.Zona;
 
 @RestController
 @RequestMapping(value="/organizadores", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,51 +55,61 @@ public class OrganizadorController {
     }
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Organizador> getOrganizador (@PathVariable("id") long id) {
+	public ResponseEntity<Organizador> getOrganizador (@PathVariable("id") long id, @RequestHeader String token) {
 		System.out.println("Obteniendo usuario con id " + id);
 		Organizador user = oDAO.recuperar(id);
-		if (user == null) {
-			System.out.println("Usuario con id " + id + " no encontrado");
+		if ( user != null ) {
+			if ( !token.equals(user.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED);
+			} else {
+				return new ResponseEntity<Organizador>(user, HttpStatus.OK); } 		
+		}	System.out.println("Usuario con id " + id + " no encontrado");
 			return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Organizador>(user, HttpStatus.OK);
 	 }
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Organizador> updateOrganizador( @PathVariable("id") long id, @RequestBody Organizador user ){
+	public ResponseEntity<Organizador> updateOrganizador( @PathVariable("id") long id, @RequestBody Organizador user, @RequestHeader String token ){
 		Organizador u = oDAO.recuperar(id);
-		if (u == null) {
-			System.out.println("Usuario con id " + id + " no encontrado");
-			return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND);
-		} else {
-			if ( user.getApellido() != null ) {
+		if (u != null) {
+			if ( !token.equals(u.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED);
+			} else {
+				if ( user.getApellido() != null ) {
 				u.setApellido(user.getApellido());
-			}
-			if ( user.getNombre() != null ) {
-				u.setNombre(user.getNombre());
-			}
-			if ( user.getUsername() != null ) {
-				u.setUsername(user.getUsername());
-			}
-			if ( user.getPassword() != null ) {
-				u.setPassword(user.getPassword());
-			}		
-			oDAO.actualizar(u);
-			return new ResponseEntity<Organizador>(user, HttpStatus.OK);
-		}
+				}
+				if ( user.getNombre() != null ) {
+					u.setNombre(user.getNombre());
+				}
+				if ( user.getUsername() != null ) {
+					u.setUsername(user.getUsername());
+				}
+				if ( user.getPassword() != null ) {
+					u.setPassword(user.getPassword());
+				}				
+				oDAO.actualizar(u);
+				return new ResponseEntity<Organizador>(u, HttpStatus.OK);	
+			}	
+		} else {	
+			System.out.println("Usuario con id " + id + " no encontrado");
+			return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND); } 	
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Organizador> deleteOrganizador( @PathVariable("id") long id ){
-		boolean existe = oDAO.existe(id);
-		if ( !existe) {
-			System.out.println("Usuario con id " + id + " no encontrado");
-			return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND);
-		} else { oDAO.borrar(id);
+	public ResponseEntity<Organizador> deleteOrganizador( @PathVariable("id") long id, @RequestHeader String token ){
+		Organizador o = oDAO.recuperar(id);
+		if ( o != null) {
+			if ( !token.equals(o.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED); }
+			else { oDAO.borrar(id);
 				return new ResponseEntity<Organizador>(HttpStatus.NO_CONTENT); }
+		} else { System.out.println("Usuario con id " + id + " no encontrado");
+				return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND); }
 	}
 	
-	@DeleteMapping()
+/*	@DeleteMapping()
 	public ResponseEntity<Organizador> deleteAllOrganizadores(){
 		System.out.println("<--- Eliminando FoodTruckers --->");
 		List <Organizador> organizadores = oDAO.recuperarTodos();	
@@ -108,7 +121,7 @@ public class OrganizadorController {
 		if ( oDAO.recuperarTodos().size() > 0 ) {
 			return new ResponseEntity<Organizador>(HttpStatus.NOT_FOUND);
 		} else { return new ResponseEntity<Organizador>(HttpStatus.NO_CONTENT); }
-	}
+	} */
 	
 	
 }
