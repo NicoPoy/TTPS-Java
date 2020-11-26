@@ -35,7 +35,7 @@ public class FoodTruckerController {
 	private ZonaDAO zDAO;	
 	
 	@GetMapping
-	public ResponseEntity<List<FoodTrucker>> getFoodTruckers( @RequestHeader String token ){		
+	public ResponseEntity<List<FoodTrucker>> getFoodTruckers(){		
 		List< FoodTrucker > foodTruckers = fDAO.recuperarTodos();
 		if(foodTruckers.isEmpty()){
 			return new ResponseEntity<List<FoodTrucker>>(HttpStatus.NO_CONTENT);
@@ -60,14 +60,17 @@ public class FoodTruckerController {
     }
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<FoodTrucker> getFoodTrucker(@PathVariable("id") long id) {
+	public ResponseEntity<FoodTrucker> getFoodTrucker(@PathVariable("id") long id, @RequestHeader String token) {	
 		System.out.println("Obteniendo usuario con id " + id);
 		FoodTrucker user = fDAO.recuperar(id);
-		if (user == null) {
-			System.out.println("Usuario con id " + id + " no encontrado");
+		if ( user != null ) {
+			if ( !token.equals(user.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED);
+			} else {
+				return new ResponseEntity<FoodTrucker>(user, HttpStatus.OK); } 		
+		}	System.out.println("Usuario con id " + id + " no encontrado");
 			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<FoodTrucker>(user, HttpStatus.OK);
 	 }
 	
 	@PutMapping("/{id}")
@@ -104,16 +107,19 @@ public class FoodTruckerController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<FoodTrucker> deleteFoodTrucker( @PathVariable("id") long id ){
-		boolean existe = fDAO.existe(id);
-		if ( !existe) {
-			System.out.println("Usuario con id " + id + " no encontrado");
-			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
-		} else { fDAO.borrar(id);
+	public ResponseEntity<FoodTrucker> deleteFoodTrucker( @PathVariable("id") long id,  @RequestHeader String token ){
+		FoodTrucker f = fDAO.recuperar(id); 
+		if ( f != null) {
+			if ( !token.equals(f.getId()+"123456") ) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED); }
+			else { fDAO.borrar(id);
 				return new ResponseEntity<FoodTrucker>(HttpStatus.NO_CONTENT); }
+		} else { System.out.println("Usuario con id " + id + " no encontrado");
+				return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND); }
 	}
 	
-	@DeleteMapping
+/*	@DeleteMapping
 	public ResponseEntity<FoodTrucker> deleteAllFoodTruckers(){
 		System.out.println("<--- Eliminando FoodTruckers --->");
 		
@@ -130,6 +136,6 @@ public class FoodTruckerController {
 			return new ResponseEntity<FoodTrucker>(HttpStatus.NOT_FOUND);
 		} else { return new ResponseEntity<FoodTrucker>(HttpStatus.NO_CONTENT); }
 		
-	}
+	} */
 	
 }

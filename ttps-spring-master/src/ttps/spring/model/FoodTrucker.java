@@ -51,5 +51,8 @@ public class FoodTrucker extends Usuario{
 		this.zona = zona;
 	}
 	
+	public boolean esFoodTrucker() {
+		return true;
+	}
 	
 }

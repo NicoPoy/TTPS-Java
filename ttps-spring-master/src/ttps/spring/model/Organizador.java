@@ -29,7 +29,11 @@ public class Organizador extends Usuario{
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
 	}
-
+	
+	public boolean esOrganizador() {
+		return true;
+	}
+	
 
 	
 }

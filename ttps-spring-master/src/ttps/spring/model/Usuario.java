@@ -72,4 +72,12 @@ public class Usuario {
 		this.password = password;
 	}
 	
+	public boolean esFoodTrucker() {
+		return false;
+	}
+	
+	public boolean esOrganizador() {
+		return false;
+	}
+	
 }

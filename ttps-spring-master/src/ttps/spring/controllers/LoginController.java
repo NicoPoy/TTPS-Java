@@ -27,7 +27,13 @@ public class LoginController {
 		if( u != null ) {
 			HttpHeaders header =  new HttpHeaders();
 			header.set("token", u.getId()+"123456");
-			return new ResponseEntity<String> (header, HttpStatus.OK);
+			if ( u.esFoodTrucker() ) {
+				header.set("tipo", "FoodTrucker");
+				return new ResponseEntity<String> (header, HttpStatus.OK);
+			} else if ( u.esOrganizador() ) {
+				header.set("tipo", "Organizador");
+				return new ResponseEntity<String> ("Logeado como Organizador", HttpStatus.OK);
+			} else { return new ResponseEntity<String> (header, HttpStatus.NO_CONTENT); }
 		}
 		return  new ResponseEntity<String> ("Usuario o contraseña incorrectos", HttpStatus.NO_CONTENT);
 	}
