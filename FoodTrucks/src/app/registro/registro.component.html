@@ -1,11 +1,12 @@
 <h1>Registrar Usuario</h1>
 <form [formGroup] = "nuevoForm" (ngSubmit)="postForm(nuevoForm.value)"> 
-    <p> Nombre: <input type='text' name='nombre'> </p> 
-    <p> Apellido: <input type='text' name='apellido'> </p> 
-    <p> Username: <input type='text' name='username'> </p> 
-    <p> Password: <input type='text' name='password'> </p>	
-    <p> <input type='checkbox' name='foodtrucker' value='foodtrucker'> FoodTrucker </p>
-    <p> <input type='checkbox' name='organizador' value='organizador'> Organizador </p>
+    <p> Nombre: <input type='text' name='nombre' name='nombre' formControlName="nombre"> </p> 
+    <p> Apellido: <input type='text' name='apellido' name='apellido' formControlName="apellido"> </p> 
+    <p> Username: <input type='text' name='username' name='username' formControlName="username"> </p> 
+    <p> Password: <input type='password' name='password' name='password' formControlName="password"> </p>	
+    
+    <!-- <p> <input type='checkbox' name='foodtrucker' value='foodtrucker'> FoodTrucker </p>
+    <p> <input type='checkbox' name='organizador' value='organizador'> Organizador </p> -->
     
     <input type='submit' value='Crear'> 
 </form>

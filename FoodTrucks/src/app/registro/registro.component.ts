@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Usuario } from 'src/app/modelos/usuario/usuario'
+
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +14,8 @@ export class RegistroComponent implements OnInit {
   nuevoForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     apellido: new FormControl('', [Validators.required, Validators.minLength(3)] ),
-    correo: new FormControl('', Validators.required)
+    username: new FormControl('', [Validators.required, Validators.minLength(3)] ),
+    password: new FormControl('', [Validators.required, Validators.minLength(3)] )
   })
 
   constructor() { }
@@ -19,7 +23,8 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  postForm(form: usuario){
+  postForm( form ){
+    console.log(form);
 
   }
 
