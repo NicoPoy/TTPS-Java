@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { FoodtruckThumbComponent } from './foodtruck-thumb/foodtruck-thumb.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     RegistroComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    FoodtruckThumbComponent
   ],
   imports: [
     RouterModule.forRoot( appRoutes ),
