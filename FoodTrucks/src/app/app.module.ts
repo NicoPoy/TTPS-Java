@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { RegistroComponent } from './registro/registro.component';
@@ -27,7 +28,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot( appRoutes ),
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
+    
   ],
   exports: [ RouterModule ],
   providers: [],
