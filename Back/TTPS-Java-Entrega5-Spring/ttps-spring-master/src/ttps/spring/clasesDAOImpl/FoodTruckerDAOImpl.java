@@ -1,0 +1,47 @@
+package ttps.spring.clasesDAOImpl;
+
+import java.util.List;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
+
+import ttps.spring.model.*;
+import ttps.spring.clasesDAO.FoodTruckerDAO;
+
+@Repository
+public class FoodTruckerDAOImpl extends GenericDAOImpl<FoodTrucker> implements FoodTruckerDAO{
+	
+	 public FoodTruckerDAOImpl() {
+		super(FoodTrucker.class);
+	 }
+
+	@Override
+	public List<FoodTrucker> recuperarTodos() {
+		String sql = " SELECT f "
+	 				+ " FROM FoodTrucker as f ";		 
+	 Query consulta = getEntityManager().createQuery(sql);
+	 return consulta.getResultList();
+	}
+
+	@Override
+	public FoodTrucker buscarPorUsername(String username) {
+		FoodTrucker resultado = null;
+		String sql = " SELECT f "
+		 			+ " FROM FoodTrucker as f"
+		 			+ " WHERE f.username = :username";
+		 Query consulta =  this.getEntityManager().createQuery(sql);
+		 consulta.setParameter("username", username);
+		 List <FoodTrucker> result = consulta.getResultList(); 
+		 if( !result.isEmpty() ) {
+			 resultado = (FoodTrucker)result.get(0); }
+		 return resultado;
+	}
+
+	 
+}
+
+
