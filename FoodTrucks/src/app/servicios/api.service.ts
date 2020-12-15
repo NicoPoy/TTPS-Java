@@ -4,14 +4,10 @@ import { ResponseI } from 'src/app/modelos/response/response-i';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
-import { LoginComponent } from '../login/login.component';
-@Injectable({
-  providedIn: 'root'
-})
-export class ApiService {
 
-  postFoodTrucker:string = "http://localhost:8080/ttps-spring/foodtruckers";
-  postOrganizador:string = "/ttps-spring/organizadores";
+@Injectable({ providedIn: 'root' })
+
+export class ApiService {
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +16,6 @@ export class ApiService {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/foodtruckers`, form)
     } else {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form) }
-  }
-
-  iniciarSesion(form:Usuario):Observable<ResponseI>{
-    return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
 
 }

@@ -10,11 +10,13 @@ import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { FoodtruckThumbComponent } from './foodtruck-thumb/foodtruck-thumb.component';
+import { HomeFoodTruckerComponent } from './home-food-trucker/home-food-trucker.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
+  {path: "foodtruckerHome", component: HomeFoodTruckerComponent},
   {path: '**', component: HomeComponent},
 ];
 
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     RegistroComponent,
     LoginComponent,
     HomeComponent,
-    FoodtruckThumbComponent
+    FoodtruckThumbComponent,
+    HomeFoodTruckerComponent
   ],
   imports: [
     RouterModule.forRoot( appRoutes ),

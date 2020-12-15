@@ -8,23 +8,11 @@ import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Servicio para gestionar los tokens de authenticacion
- *
- * @author manuel
- */
 @Service
 public class TokenServices {
 
     final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    /**
-     * Genera el token de authorizacion para el usuario
-     *
-     * @param username Username que se guarda dentro del token
-     * @param segundos tiempo de validez del token
-     * @return token
-     */
     public static String generateToken(String username, int segundos) {
 
         Date exp = getExpiration(new Date(), segundos);
@@ -32,13 +20,6 @@ public class TokenServices {
         return Jwts.builder().setSubject(username).signWith(key).setExpiration(exp).compact();
     }
 
-    /**
-     * Retorna la suma de <code>segundos</code> a la <code>fecha</code>
-     *
-     * @param date
-     * @param segundos
-     * @return
-     */
     private static Date getExpiration(Date date, int segundos) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date); // Configuramos la fecha que se recibe
