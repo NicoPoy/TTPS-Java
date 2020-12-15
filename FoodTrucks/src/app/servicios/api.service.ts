@@ -9,13 +9,18 @@ import { environment as env } from 'src/environments/environment';
 })
 export class ApiService {
 
-  postFoodTrucker:string = "http://localhost:8080//ttps-spring/foodtruckers";
+  postFoodTrucker:string = "http://localhost:8080/ttps-spring/foodtruckers";
   postOrganizador:string = "/ttps-spring/organizadores";
 
   constructor(private http: HttpClient) { }
 
   crearUsuario(form:Usuario):Observable<ResponseI>{
-    return this.http.post<ResponseI>( `${env.url}/ttps-spring/foodtruckers`, form)
+    if (form.foodtrucker == true) {
+      return this.http.post<ResponseI>( `${env.url}ttps-spring/foodtruckers`, form)
+    } else {
+      return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form)
+    }
+   
   }
 
 }

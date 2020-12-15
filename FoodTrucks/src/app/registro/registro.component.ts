@@ -18,7 +18,8 @@ export class RegistroComponent implements OnInit {
     username: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     password: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     foodtrucker: new FormControl(''),
-    organizador: new FormControl('')
+    organizador: new FormControl(''),
+    zona: new FormControl ('1')
   })
 
   constructor( private api:ApiService ) { }
@@ -27,7 +28,6 @@ export class RegistroComponent implements OnInit {
   }
 
   postForm( form ){
-    console.log(form);
     this.api.crearUsuario(form).subscribe(data => console.log(data) );
   }
 
