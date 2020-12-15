@@ -4,6 +4,7 @@ import { ResponseI } from 'src/app/modelos/response/response-i';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
+import { LoginComponent } from '../login/login.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,9 +19,11 @@ export class ApiService {
     if (form.foodtrucker == true) {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/foodtruckers`, form)
     } else {
-      return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form)
-    }
-   
+      return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form) }
+  }
+
+  iniciarSesion(form:Usuario):Observable<ResponseI>{
+    return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
 
 }

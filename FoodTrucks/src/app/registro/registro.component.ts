@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/modelos/usuario/usuario'
 import { ApiService } from 'src/app/servicios/api.service'
@@ -27,8 +26,9 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  postForm( form ){
+  postForm( form:Usuario ){
     this.api.crearUsuario(form).subscribe(data => console.log(data) );
+    
   }
 
 }
