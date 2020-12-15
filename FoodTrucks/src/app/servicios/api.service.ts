@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { LoginComponent } from '../login/login.component';
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
+import { Subject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +16,7 @@ import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 
 export class ApiService {
 
+ 
   constructor(private http: HttpClient) { }
 
   crearUsuario(form:Usuario):Observable<ResponseI>{

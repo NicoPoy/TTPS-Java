@@ -21,10 +21,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(3)] )
   })
 
+
   constructor( private api:ApiService, private auth:AuthenticationService, private router:Router ) { }
 
   ngOnInit(): void { 
-    if( localStorage.getItem("token") != "null" ){
+    if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
       this.router.navigate(['/home']);
     }
   }
@@ -32,11 +33,9 @@ export class LoginComponent implements OnInit {
   postForm( form:Usuario ){
      this.auth.login(form).subscribe(data => {
       let dataResponse: ResponseI = data;
-      if (dataResponse.status == "ok") {
         localStorage.setItem("token", dataResponse.token);
         localStorage.setItem("userType", dataResponse.type);
         this.router.navigate(['/home']);
-      }
     });
   }
 

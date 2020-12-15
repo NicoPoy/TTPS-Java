@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment as env } from 'src/environments/environment';
 import { Usuario } from 'src/app/modelos/usuario/usuario';
@@ -21,7 +21,6 @@ export class AuthenticationService {
     }
 
     login(form:Usuario):Observable<any> {
-        
         return this.http.post<any>(`${env.url}ttps-spring/auth/login`, form, 
             { headers: {'header1':'value1','header2':'value2'} } )
             

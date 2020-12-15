@@ -27,7 +27,11 @@ export class RegistroComponent implements OnInit {
 
   constructor( private api:ApiService, private auth: AuthenticationService, private router:Router ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
+      this.router.navigate(['/home']);
+    }
+   }
 
   async postForm( form:Usuario ){
     this.api.crearUsuario(form).subscribe(data => console.log(data) );
