@@ -50,9 +50,14 @@ public class LoginController {
 		Usuario u = uDAO.login( user.getUsername(), user.getPassword() );
 		if( u != null ) {
 			String token = TokenServices.generateToken(user.getUsername(), EXPIRATION_IN_SEC);
-			HttpHeaders header =  new HttpHeaders();
-			header.set("token",token);
-		    return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, user.getUsername()));
+			String status = "ok";
+			String tipo;
+			
+			if (u.esFoodTrucker()) {
+				tipo = "foodtrucker";
+			} else { tipo = "organizador"; }
+			
+		    return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, status, tipo));
 		} else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto"); }
 	}	

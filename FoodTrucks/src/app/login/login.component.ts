@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/modelos/usuario/usuario'
 import { ApiService } from 'src/app/servicios/api.service'
 import { AuthenticationService } from 'src/app/servicios/authentication.service'
 import { AppComponent } from 'src/app/app.component'
+import { ResponseI } from '../modelos/response/response-i';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +22,21 @@ export class LoginComponent implements OnInit {
 
   constructor( private api:ApiService, private auth:AuthenticationService, private router:Router ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    if( localStorage.getItem("token") != "null" ){
+      this.router.navigate(['/home']);
+    }
+  }
 
   postForm( form:Usuario ){
-     this.auth.login(form).subscribe(data => console.log(data) );   
+     this.auth.login(form).subscribe(data => {
+      let dataResponse: ResponseI = data;
+      if (dataResponse.status == "ok") {
+        localStorage.setItem("token", dataResponse.token);
+        localStorage.setItem("userType", dataResponse.type);
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
 

@@ -23,10 +23,7 @@ export class AuthenticationService {
     login(form:Usuario):Observable<any> {
         return this.http.post<any>(`${env.url}ttps-spring/auth/login`, form )
             .pipe(map(credentials => {
-                // login successful si hay un token en la respuesta
                 if (credentials && credentials.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(credentials));
                     this.currentUserSubject.next(credentials);
                 }
                 return credentials;
@@ -34,9 +31,8 @@ export class AuthenticationService {
     }
 
     logout() {
-        // elimino las credenciales del localstorage al deslogearme
-        localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        localStorage.setItem("token", null);
     }
 
 }
