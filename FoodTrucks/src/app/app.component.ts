@@ -12,7 +12,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 export class AppComponent implements OnInit {
   title = 'FoodTrucks';
   estaLogueado;
-  esFoodTrucker = true;
+  esFoodTrucker;
 
   public currentUser: Usuario;
 
@@ -34,11 +34,13 @@ export class AppComponent implements OnInit {
   actualizar(){
     if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
       this.estaLogueado = true;
-    } else { this.estaLogueado = false }
-    
-    if( localStorage.getItem("userType") == "foodtrucker" ){
-      this.esFoodTrucker = true
-    } else { this.esFoodTrucker = false }
+
+      if( localStorage.getItem("userType") == "foodtrucker" ){
+        this.esFoodTrucker = true
+      } else { this.esFoodTrucker = false }
+
+    } else { this.estaLogueado = false 
+             this.esFoodTrucker = false }
   }  
 
 }

@@ -35,6 +35,9 @@ export class AuthenticationService {
     logout() {
         this.currentUserSubject.next(null);
         localStorage.setItem("token", null);
+        localStorage.setItem("status", "ok");
+        localStorage.setItem("userID", null);
+        localStorage.setItem("userType", "publico");
     }
 
 }

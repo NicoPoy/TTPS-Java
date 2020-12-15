@@ -3,5 +3,6 @@ export class ResponseI {
     exp: string;
     status:string;
     type: string;
+    userID: string;
 }
 

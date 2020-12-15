@@ -35,15 +35,15 @@ export class RegistroComponent implements OnInit {
 
   async postForm( form:Usuario ){
     this.api.crearUsuario(form).subscribe(data => console.log(data) );
-    console.log( "Se registro el usuario correctamente");
-
     await this.sleep(200);
-
+    console.log( "Se registro el usuario correctamente");
     this.auth.login(form).subscribe(data => {
       let dataResponse: ResponseI = data;
       if (dataResponse.status == "ok") {
         localStorage.setItem("token", dataResponse.token);
+        localStorage.setItem("status", dataResponse.status);
         localStorage.setItem("userType", dataResponse.type);
+        localStorage.setItem("userID", dataResponse.userID);
         this.router.navigate(['/home']);
       }
     });
@@ -56,5 +56,5 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  
+
 }

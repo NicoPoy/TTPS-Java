@@ -6,15 +6,17 @@ public class Credentials {
     private int exp;
     private String status;
     private String type;
+    private String userID;
 
     public Credentials() {
     }
 
-    public Credentials(String token, int exp, String username, String type) {
+    public Credentials(String token, int exp, String username, String type, String userID) {
         this.token = token;
         this.exp = exp;
         this.status = username;
         this.type = type;
+        this.userID = userID;
     }
 
     public String getToken() {
@@ -47,6 +49,14 @@ public class Credentials {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
     
     

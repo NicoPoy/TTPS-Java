@@ -48,16 +48,20 @@ public class LoginController {
 	@PostMapping
 	public ResponseEntity<?> loginNuevo (@RequestBody Usuario user){
 		Usuario u = uDAO.login( user.getUsername(), user.getPassword() );
+		
 		if( u != null ) {
+			
 			String token = TokenServices.generateToken(user.getUsername(), EXPIRATION_IN_SEC);
 			String status = "ok";
 			String tipo;
+			String userID = Long.toString(u.getId()) ;
 			
 			if (u.esFoodTrucker()) {
 				tipo = "foodtrucker";
 			} else { tipo = "organizador"; }
 			
-		    return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, status, tipo));
+		    return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, status, tipo, userID));
+		
 		} else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto"); }
 	}	
