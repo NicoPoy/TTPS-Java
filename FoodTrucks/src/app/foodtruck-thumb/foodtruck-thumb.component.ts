@@ -9,6 +9,12 @@ export class FoodtruckThumbComponent implements OnInit {
 
   constructor() { }
 
+  nombrefoodtruck = "Camioncito"
+
+  tiposservicio = 'Servicio1, servicio2, servicio3';
+
+  direccionft = "/foodtruck/12345";
+
   ngOnInit(): void {
   }
 
