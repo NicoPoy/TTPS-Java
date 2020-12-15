@@ -1,8 +1,8 @@
-<div class="col-sm bg-danger border border-dark rounded p-1 m-5 ">
-    <h3 class="text-center font-weight-bold text-primary">{{ nombrefoodtruck }}</h3>
+<div class="bg-danger border border-dark rounded p-1 m-1 ">
+    <h3 class="text-center font-weight-bold text-primary">{{ ft.nombre }}</h3>
     <p class="text-center">Tipos de servicio:</p>
-    <p class="text-center font-weight-light">{{ tiposservicio }}</p>
-    <a [routerLink]="direccionft" routerLinkActive="active">
+     <p class="text-center font-weight-light">{{ servicios }}</p>
+    <a [routerLink]="direccion" routerLinkActive="active">
         <p class="text-center font-weight-bold text-success">Ver FoodTruck</p>
     </a>
 </div>

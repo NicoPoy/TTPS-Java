@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 
 @Component({
   selector: 'app-foodtruck-thumb',
@@ -7,15 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoodtruckThumbComponent implements OnInit {
 
-  constructor() { }
+  @Input() ft: Foodtruck; 
 
-  nombrefoodtruck = "Camioncito"
+  direccion: string;
+  servicios: string;
 
-  tiposservicio = 'Servicio1, servicio2, servicio3';
-
-  direccionft = "/foodtruck/12345";
+  constructor() { 
+  }
 
   ngOnInit(): void {
+    this.direccion = "/foodtruck/" + this.ft.id;
+    this.servicios = this.ft.servicios.join(", ") + ".";
   }
 
 }

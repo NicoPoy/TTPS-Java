@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
+import { ApiService } from 'src/app/servicios/api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  mejoresft: Foodtruck[];
+
+  constructor(private api:ApiService) {
+    this.mejoresft = api.mejoresFoodTrucks();
+
+  }
 
   ngOnInit(): void {
   }
