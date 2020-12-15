@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/modelos/usuario/usuario'
 import { ApiService } from 'src/app/servicios/api.service'
 import { AuthenticationService } from 'src/app/servicios/authentication.service'
-import { AppComponent } from 'src/app/app.component'
 import { ResponseI } from '../modelos/response/response-i';
+
+import { HttpHeaders } from '@angular/common/http'
 
 @Component({
   selector: 'app-login',

@@ -21,7 +21,10 @@ export class AuthenticationService {
     }
 
     login(form:Usuario):Observable<any> {
-        return this.http.post<any>(`${env.url}ttps-spring/auth/login`, form )
+        
+        return this.http.post<any>(`${env.url}ttps-spring/auth/login`, form, 
+            { headers: {'header1':'value1','header2':'value2'} } )
+            
             .pipe(map(credentials => {
                 if (credentials && credentials.token) {
                     this.currentUserSubject.next(credentials);

@@ -22,15 +22,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-
     if( localStorage.getItem("token") != "null" ){
       this.estaLogueado = true;
     } else { this.estaLogueado = false }
-
+    
     if( localStorage.getItem("userType") == "foodtrucker" ){
       this.esFoodTrucker = true
     } else { this.esFoodTrucker = false }
-    
   }
   
   logout(){
@@ -39,8 +37,6 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  public refresh() {
-    this.ngOnInit();
-  }
+  
 
 }
