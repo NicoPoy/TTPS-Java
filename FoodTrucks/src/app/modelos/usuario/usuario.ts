@@ -3,16 +3,14 @@ export class Usuario {
     public apellido: string;
     public username: string;
     public password: string;
-    public foodtrucker: boolean;
-    public organizador: boolean;
+    public tipocuenta: string;
 
-    constructor (nombre: string, apellido: string, username: string, password: string, foodtrucker:boolean, organizador:boolean){
+    constructor (nombre: string, apellido: string, username: string, password: string, tipocuenta: string){
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
         this.password = password;
-        this.foodtrucker = foodtrucker;
-        this.organizador = organizador;
+        this.tipocuenta = tipocuenta;
     }
     
 }

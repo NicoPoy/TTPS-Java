@@ -16,8 +16,7 @@ export class RegistroComponent implements OnInit {
     apellido: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     username: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     password: new FormControl('', [Validators.required, Validators.minLength(3)] ),
-    foodtrucker: new FormControl(''),
-    organizador: new FormControl(''),
+    tipocuenta: new FormControl(''),
     zona: new FormControl ('1')
   })
 
