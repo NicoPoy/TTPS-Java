@@ -15,7 +15,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   crearUsuario(form:Usuario):Observable<ResponseI>{
-    if (form.foodtrucker == true) {
+    if (form.tipocuenta == "foodtrucker") {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/foodtruckers`, form)
     } else {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form)

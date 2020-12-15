@@ -4,9 +4,12 @@
     <p> Apellido: <input type='text' name='apellido' formControlName="apellido"> </p> 
     <p> Username: <input type='text' name='username' formControlName="username"> </p> 
     <p> Password: <input type='password' name='password' formControlName="password"> </p>	
-    
-    <p> <input type='checkbox' name='foodtrucker' value='foodtrucker' formControlName="foodtrucker"> FoodTrucker </p>
-    <p> <input type='checkbox' name='organizador' value='organizador' formControlName="organizador"> Organizador </p>
-    
+        
+    <p>Tipo de cuenta:</p>
+    <input type="radio" id="radiofoodtrucker" name="tipocuenta" value="foodtrucker" formControlName="tipocuenta">
+    <label for="radiofoodtrucker">FoodTrucker</label><br>
+    <input type="radio" id="radioorganizador" name="tipocuenta" value="organizador" formControlName="tipocuenta">
+    <label for="radioorganizador">Organizador</label><br>
+
     <input type='submit' value='Crear'> 
 </form>
