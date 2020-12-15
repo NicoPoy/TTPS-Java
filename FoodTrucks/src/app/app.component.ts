@@ -11,7 +11,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 
 export class AppComponent {
   title = 'FoodTrucks';
-  estaLogueado = true;
+  estaLogueado = false;
   esFoodTrucker = true;
 
   public currentUser: Usuario;
