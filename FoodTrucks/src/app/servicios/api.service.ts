@@ -31,8 +31,8 @@ export class ApiService {
     return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
 
-  getTiposDeServicio(): Array<TipoDeServicio> {
-
+  getTiposDeServicio():Observable<TipoDeServicio[]> {
+    return this.http.get<TipoDeServicio[]>(`${env.url}ttps-spring/tiposdeservicios`)
   }
 
   mejoresft: Foodtruck[];

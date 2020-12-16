@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'nuevofoodtruck', component: NewFoodtruckComponent},
+  {path: 'altafoodtruck', component: NewFoodtruckComponent},
   {path: '**', component: HomeComponent},
 ];
 

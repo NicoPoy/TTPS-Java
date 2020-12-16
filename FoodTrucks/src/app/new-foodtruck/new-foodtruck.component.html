@@ -1,4 +1,4 @@
-<p>new-foodtruck works!</p>
+<h1>Registrar FoodTruck</h1>
 
 <form [formGroup] = "nuevoFoodtruckForm" (ngSubmit)="postFoodtruckForm(nuevoFoodtruckForm.value)">
 
@@ -20,6 +20,12 @@
     <div> Descripcion: </div> 
     <div> <textarea rows="4" cols="50" name="Descripcion" formControlName="descripcion" > </textarea> </div>   
 
+    <div *ngFor="let servicio of listaServicios">
+        <input type="checkbox" id= {{servicio.nombre}} name= "tipoDeServicio" value= {{servicio.id}} [formControlName]="servicio.nombre" >
+        <label for="tipoDeServicio"> {{servicio.nombre}} </label><br>
+    </div>
+
+
     <input type='submit' value='Crear'>
-     
+
 </form>
