@@ -30,11 +30,12 @@ export class ApiService {
   iniciarSesion(form:Usuario):Observable<ResponseI>{
     return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
-
+  
   getTiposDeServicio():Observable<TipoDeServicio[]> {
     return this.http.get<TipoDeServicio[]>(`${env.url}ttps-spring/tiposdeservicios`)
   }
 
+  //DATOS DE PRUEBA QUE HAY QUE BORRAR owo
   mejoresft: Foodtruck[];
   ft1: Foodtruck; ft2: Foodtruck;
   stringAux1: string[]; stringAux2: string[];
@@ -60,6 +61,44 @@ export class ApiService {
 
     return this.mejoresft;
 
+  }
+
+  getFoodTruck(idft: number){ //todavia no anda, tiene datos de prueba.
+  
+    this.stringAux1 = [];
+    this.stringAux1.push("Coca-Cola");
+    this.stringAux1.push("Pepsi");
+    this.stringAux1.push("Manaos");
+    this.ft1 = new Foodtruck(3,"Camionazo", "Autobot.", "@un_insta", "@un_twitter", "+4874837434919", "https://www.camionazo.com/owo", this.stringAux1);
+
+    return this.ft1;
+  
+  }
+
+  FoodTrucksDeUsuario(id: number){ //todavia no anda, tiene datos de prueba.
+
+    this.stringAux1 = [];
+    this.stringAux1.push("BBBBBB");
+    this.stringAux1.push("BBBBB");
+    this.ft1 = new Foodtruck(4,"BBBBB", "BBBBB.", "BBBBB", "BBBBB", "BBBBB", "BBBBB", this.stringAux1);
+
+    
+    this.stringAux2 = [];
+    this.stringAux2.push("CCCCC");
+    this.stringAux2.push("CCCCC");
+    this.ft2 = new Foodtruck(5,"CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", this.stringAux2);
+  
+    this.mejoresft = [];
+    this.mejoresft.push(this.ft1);
+    this.mejoresft.push(this.ft2);
+
+
+    return this.mejoresft;
+
+  }
+
+  esMiFoodTruck(idFt: number, idUs: number){ //todavia no anda, tiene datos de prueba.
+    return true;
   }
 
 }
