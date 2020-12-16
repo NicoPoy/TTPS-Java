@@ -38,7 +38,7 @@ export class NewFoodtruckComponent implements OnInit {
     });
   }
 
-  postFoodtruckForm( form: Foodtruck ){
+  async postFoodtruckForm( form: Foodtruck ){
     let selectServicios: Array<TipoDeServicio> = [];
     this.listaServicios.map( elem => {
       if ( this.nuevoFoodtruckForm.controls[elem.nombre].value ) {
@@ -51,7 +51,16 @@ export class NewFoodtruckComponent implements OnInit {
     let ft = new Foodtruck (null,form.nombre, form.descripcion, form.instagram, form.twitter, form.whatsapp, form.url, selectServicios);
     
     this.api.crearFoodTruck(ft).subscribe( data => console.log(data) );
-  
+    
+    await this.sleep(200);
+    this.router.navigate(['/misFoodtrucks']);
+
+  }
+
+  sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
   }
 
 }
