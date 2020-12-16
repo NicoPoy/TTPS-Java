@@ -39,13 +39,11 @@ export class RegistroComponent implements OnInit {
     console.log( "Se registro el usuario correctamente");
     this.auth.login(form).subscribe(data => {
       let dataResponse: ResponseI = data;
-      if (dataResponse.status == "ok") {
         localStorage.setItem("token", dataResponse.token);
         localStorage.setItem("status", dataResponse.status);
         localStorage.setItem("userType", dataResponse.type);
         localStorage.setItem("userID", dataResponse.userID);
         this.router.navigate(['/home']);
-      }
     });
 
   }
