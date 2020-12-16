@@ -7,6 +7,7 @@ import { environment as env } from 'src/environments/environment';
 import { LoginComponent } from '../login/login.component';
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 import { Subject } from 'rxjs';
+import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class ApiService {
     return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
 
+  getTiposDeServicio(): Array<TipoDeServicio> {
+
+  }
 
   mejoresft: Foodtruck[];
   ft1: Foodtruck; ft2: Foodtruck;
