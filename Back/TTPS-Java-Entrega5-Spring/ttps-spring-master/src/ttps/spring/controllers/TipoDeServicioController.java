@@ -25,9 +25,7 @@ public class TipoDeServicioController {
 	
 	@GetMapping
 	public ResponseEntity<List<TipoDeServicio>> getTiposDeServicio( ){	
-		System.out.println("-- LLEGO A LA API --");
 		List< TipoDeServicio > servicios = tsDAO.traerTodos();
-		System.out.println("Se encontraron " + servicios.size() + " servicios.");
 		if(servicios.isEmpty()){
 			return new ResponseEntity<List<TipoDeServicio>>(HttpStatus.NO_CONTENT);
 		}	

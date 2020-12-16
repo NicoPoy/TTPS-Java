@@ -27,6 +27,14 @@ export class ApiService {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form) }
   }
 
+  crearFoodTruck(form: Foodtruck):Observable<Foodtruck>{
+    console.log(form.servicios);
+    
+    return this.http.post<any>(`${env.url}ttps-spring/foodtrucks/`+localStorage.getItem("userID"), form, 
+    { headers: { 'token':localStorage.getItem("token") } } )
+    
+  }
+
   iniciarSesion(form:Usuario):Observable<ResponseI>{
     return this.http.post<ResponseI>( `${env.url}ttps-spring/auth/login`, form)
   }
@@ -35,6 +43,13 @@ export class ApiService {
     return this.http.get<TipoDeServicio[]>(`${env.url}ttps-spring/tiposdeservicios`)
   }
 
+
+
+
+
+
+
+  
   //DATOS DE PRUEBA QUE HAY QUE BORRAR owo
   mejoresft: Foodtruck[];
   ft1: Foodtruck; ft2: Foodtruck;

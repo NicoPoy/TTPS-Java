@@ -29,6 +29,7 @@ import ttps.spring.model.FoodTruck;
 import ttps.spring.model.TipoDeServicio;
 import ttps.spring.model.FoodTruck;
 import ttps.spring.model.Usuario;
+import ttps.spring.services.*;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -88,9 +89,12 @@ public class FoodTruckController {
 	
 	@PostMapping("/{id}")
 	public ResponseEntity<FoodTruck> crearFoodTruck(@RequestBody FoodTruck foodtruck, @PathVariable("id") long id, @RequestHeader String token) {
+		
+		System.out.println("Llega el token = " + token);
+		
 		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
 		if (foodtrucker != null) {
-			if (!token.equals(foodtrucker.getId() + "123456")) {
+			if (!TokenServices.validateToken(token)) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
 			} else {

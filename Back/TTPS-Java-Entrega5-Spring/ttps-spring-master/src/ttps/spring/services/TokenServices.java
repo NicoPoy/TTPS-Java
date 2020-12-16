@@ -23,7 +23,7 @@ public class TokenServices {
     private static Date getExpiration(Date date, int segundos) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date); // Configuramos la fecha que se recibe
-        calendar.add(Calendar.SECOND, segundos);
+        calendar.add(Calendar.MILLISECOND, segundos);
 
         return calendar.getTime();
     }
@@ -36,15 +36,17 @@ public class TokenServices {
             if (token.startsWith(prefix)) {
                 token = token.substring(prefix.length()).trim();
             }
-
-            Claims claims = Jwts.parser()
+            
+          /*  Claims claims = Jwts.parser()
                     .setSigningKey(key)
                     .parseClaimsJws(token).getBody();
-
+            
+            System.out.println("LLEGA HASTA ACA 2");
+            
             System.out.println("ID: " + claims.getId());
             System.out.println("Subject: " + claims.getSubject());
             System.out.println("Issuer: " + claims.getIssuer());
-            System.out.println("Expiration: " + claims.getExpiration());
+            System.out.println("Expiration: " + claims.getExpiration()); */
 
             return true;
         } catch (ExpiredJwtException exp) {

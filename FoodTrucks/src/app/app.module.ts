@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'altafoodtruck', component: NewFoodtruckComponent},
+  {path: 'nuevoFoodtruck', component: NewFoodtruckComponent},
   {path: 'foodtruck/:id', component: FoodtruckFullComponent},
   {path: 'misFoodtrucks', component: MisFoodtrucksComponent},
   {path: '**', component: HomeComponent},
@@ -40,8 +40,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-    
+    HttpClientModule  
   ],
   exports: [ RouterModule ],
   providers: [],

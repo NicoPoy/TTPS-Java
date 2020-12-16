@@ -27,31 +27,26 @@ export class NewFoodtruckComponent implements OnInit {
   constructor( private api:ApiService, private router:Router ) { }
 
   ngOnInit(): void {
-
     this.api.getTiposDeServicio().subscribe(data => {
-      
       this.listaServicios = data;
-
       console.log( this.listaServicios );
-    
       this.listaServicios.map( elem =>  this.nuevoFoodtruckForm.addControl(elem.nombre, new FormControl('')) );
-
-      /* for (let servicio of this.servicios) { 
-        this.nuevoFoodtruckForm.addControl(servicio.nombre, new FormControl(''));
-      }; */
-
-      
-
     });
-  
-
-    
-
-    //this.servicios.forEach( serv => this.nuevoFoodtruckForm.addControl( 'new', ('') ) )
-
   }
 
   postFoodtruckForm( form: Foodtruck ){
+    let selectServicios: Array<TipoDeServicio> = [];
+    this.listaServicios.map( elem => {
+      if ( this.nuevoFoodtruckForm.controls[elem.nombre].value ) {
+        selectServicios.push(elem);
+      };
+    });
+
+    console.log(selectServicios);
+
+    let ft = new Foodtruck (form.nombre, form.descripcion, form.instagram, form.twitter, form.whatsapp, form.url, selectServicios);
+    
+    this.api.crearFoodTruck(ft).subscribe( data => console.log(data) );
   
   }
 
