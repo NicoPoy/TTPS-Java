@@ -99,7 +99,10 @@ public class FoodTruckController {
 				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
 			} else {
 				foodtruck.setFoodtrucker(foodtrucker);
+				System.out.print("<<< Se recibieron " + foodtruck.getTipos().size() + "tipos de serviciso >>>" );
+				
 				ListIterator it = foodtruck.getTipos().listIterator();
+				
 				List<TipoDeServicio> tipos = new ArrayList();
 				while (it.hasNext()) {
 					TipoDeServicio ts = (TipoDeServicio) it.next();

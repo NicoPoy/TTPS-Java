@@ -9,15 +9,17 @@ export class Foodtruck {
     public twitter: string;
     public whatsapp: string;
     public url: string;
-    public servicios:any;
+    public tipos:any;
 
-    constructor (n: string, d: string, ig: string, t: string, w: string, u: string, s:any ){
+    constructor (i: number, n: string, d: string, ig: string, t: string, w: string, u: string, s:any ){
+        this.id = i;
         this.nombre = n;
         this.descripcion = d;
         this.instagram = ig;
         this.twitter = t;
         this.whatsapp = w;
         this.url = u;
-        this.servicios = s;
+        this.tipos = s;
     }
+
 }

@@ -27,9 +27,7 @@ export class ApiService {
       return this.http.post<ResponseI>( `${env.url}ttps-spring/organizadores`, form) }
   }
 
-  crearFoodTruck(form: Foodtruck):Observable<Foodtruck>{
-    console.log(form.servicios);
-    
+  crearFoodTruck(form: Foodtruck):Observable<Foodtruck>{  
     return this.http.post<any>(`${env.url}ttps-spring/foodtrucks/`+localStorage.getItem("userID"), form, 
     { headers: { 'token':localStorage.getItem("token") } } )
     

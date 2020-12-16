@@ -44,7 +44,7 @@ export class NewFoodtruckComponent implements OnInit {
 
     console.log(selectServicios);
 
-    let ft = new Foodtruck (form.nombre, form.descripcion, form.instagram, form.twitter, form.whatsapp, form.url, selectServicios);
+    let ft = new Foodtruck (null,form.nombre, form.descripcion, form.instagram, form.twitter, form.whatsapp, form.url, selectServicios);
     
     this.api.crearFoodTruck(ft).subscribe( data => console.log(data) );
   
