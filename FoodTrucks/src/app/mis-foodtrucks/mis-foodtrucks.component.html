@@ -1,1 +1,6 @@
-<p>mis-foodtrucks works!</p>
+<h2 class="font-weight-bold"> Mis FoodTrucks </h2>    
+<div class="row">
+    <div *ngFor="let ftactual of misFt" class="col-md-4 col-sm-6 col-12">
+        <app-foodtruck-thumb [ft]="ftactual"></app-foodtruck-thumb>
+    </div>
+</div>
