@@ -13,6 +13,9 @@ import { FoodtruckThumbComponent } from './foodtruck-thumb/foodtruck-thumb.compo
 import { NewFoodtruckComponent } from './new-foodtruck/new-foodtruck.component';
 import { FoodtruckFullComponent } from './foodtruck-full/foodtruck-full.component';
 import { MisFoodtrucksComponent } from './mis-foodtrucks/mis-foodtrucks.component';
+import { ActFoodtruckComponent } from './act-foodtruck/act-foodtruck.component';
+import { DelFoodtruckComponent } from './del-foodtruck/del-foodtruck.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +24,9 @@ const appRoutes: Routes = [
   {path: 'nuevoFoodtruck', component: NewFoodtruckComponent},
   {path: 'foodtruck/:id', component: FoodtruckFullComponent},
   {path: 'misFoodtrucks', component: MisFoodtrucksComponent},
+  {path: 'delFoodtruck/:id', component: DelFoodtruckComponent},
+  {path: 'actFoodtruck/:id', component: ActFoodtruckComponent},
+  {path: 'perfil', component: EditarPerfilComponent},
   {path: '**', component: HomeComponent},
 ];
 
@@ -34,6 +40,9 @@ const appRoutes: Routes = [
     NewFoodtruckComponent,
     FoodtruckFullComponent,
     MisFoodtrucksComponent,
+    ActFoodtruckComponent,
+    DelFoodtruckComponent,
+    EditarPerfilComponent,
   ],
   imports: [
     RouterModule.forRoot( appRoutes ),
