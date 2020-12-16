@@ -1,1 +1,8 @@
-<p>editar-perfil works!</p>
+<h1>Editar Perfil</h1>
+<form> 
+    <p> Nombre: <input type='text' name='nombre' formControlName="nombre" [value]="u.nombre"> </p> 
+    <p> Apellido: <input type='text' name='apellido' formControlName="apellido" [value]="u.apellido"> </p> 
+    <p> Username: <input type='text' name='username' formControlName="username" [value]="u.username"> </p> 
+    <p> Password: <input type='password' name='password' formControlName="password" [value]="u.password"> </p>	
+    <input type='submit' value='Actualizar'> 
+</form>
