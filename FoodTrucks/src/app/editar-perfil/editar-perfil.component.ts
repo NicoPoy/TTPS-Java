@@ -18,7 +18,7 @@ export class EditarPerfilComponent implements OnInit {
     if( localStorage.getItem("token") == null || localStorage.getItem("token") == "null" ){
       this.router.navigate(['/login']);
     }
-    this.u = this.api.getUsuario(+localStorage.getItem("userID"));
+    //this.u = this.api.getUsuario(+localStorage.getItem("userID"));
   }
 
 }

@@ -24,7 +24,11 @@ export class NewFoodtruckComponent implements OnInit {
     descripcion: new FormControl('', [Validators.required, Validators.minLength(3)] ),
   })
 
-  constructor( private api:ApiService, private router:Router ) { }
+  constructor( private api:ApiService, private router:Router ) {
+    if( localStorage.getItem("token") == null || localStorage.getItem("token") == "null" ){
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit(): void {
     this.api.getTiposDeServicio().subscribe(data => {
