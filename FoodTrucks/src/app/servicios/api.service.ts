@@ -58,4 +58,16 @@ export class ApiService {
 
   }
 
+  getFoodTruck(idft: number){ //todavia no anda, tiene datos de prueba.
+  
+    this.stringAux1 = [];
+    this.stringAux1.push("Coca-Cola");
+    this.stringAux1.push("Pepsi");
+    this.stringAux1.push("Manaos");
+    this.ft1 = new Foodtruck(1,"Camionazo", "Autobot.", "@un_insta", "@un_twitter", "+4874837434919", "https://www.camionazo.com/owo", this.stringAux1);
+
+    return this.ft1;
+  
+  }
+
 }
