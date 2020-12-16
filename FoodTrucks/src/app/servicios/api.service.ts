@@ -46,7 +46,6 @@ export class ApiService {
   }
 
   getFoodTruck(idft: string):Observable<Foodtruck> { 
-    let headers = { 'token': localStorage.getItem("token"), 'foodTruckID':idft.toString  }
     return this.http.get<any>(`${env.url}ttps-spring/foodtrucks/buscar`,  { headers: { 'token':localStorage.getItem("token"), 'foodTruckID':idft } } )    
   }
 
@@ -56,6 +55,21 @@ export class ApiService {
 
   esMiFoodTruck(idFt: string, idUs: string){ //todavia no anda, tiene datos de prueba.
     return true;
+  }
+
+  getUsuario(idu: string):Observable<Usuario> {
+    let tipo: string = localStorage.getItem("userType");
+    if(tipo == "foodtrucker"){
+      return this.http.get<any>(`${env.url}ttps-spring/foodtruckers/`+idu,  { headers: { 'token':localStorage.getItem("token")} } )    
+    }
+    else{
+      return this.http.get<any>(`${env.url}ttps-spring/organizadores/`+idu,  { headers: { 'token':localStorage.getItem("token")} } )    
+    }
+    
+  }
+
+  editarUsuario(u: Usuario, idu: string){
+     this.http.put(`${env.url}ttps-spring/foodtruckers/`+idu, u,  { headers: { 'token':localStorage.getItem("token")} } )
   }
 
 }
