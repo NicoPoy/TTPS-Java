@@ -27,8 +27,8 @@ export class FoodtruckFullComponent implements OnInit {
     this.idUsuario = +localStorage.getItem("userID");
     if(this.api.esMiFoodTruck(this.idFoodTruck,this.idUsuario)){
       this.miFoodTruck = true;
-      this.direccionAct = ""; //HACER
-      this.direccionDel = ""; //HACER
+      this.direccionAct = "/actFoodtruck/" + this.ft.id;
+      this.direccionDel = "/delFoodtruck/" + this.ft.id;
     }
     else{
       this.miFoodTruck = false;
