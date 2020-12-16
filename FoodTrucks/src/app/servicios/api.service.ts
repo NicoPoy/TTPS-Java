@@ -92,4 +92,8 @@ export class ApiService {
 
   }
 
+  esMiFoodTruck(idFt: number, idUs: number){ //todavia no anda, tiene datos de prueba.
+    return true;
+  }
+
 }

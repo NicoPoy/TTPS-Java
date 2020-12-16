@@ -6,4 +6,10 @@
     <p class="text-center">Twitter: {{ ft.twitter }}</p>
     <p class="text-center">Whatsapp: {{ ft.whatsapp }}</p>
     <p class="text-center">Sitio Web: {{ ft.url }}</p>
+    <a [routerLink]="direccionAct" routerLinkActive="active" *ngIf="miFoodTruck">
+        <p class="text-center font-weight-bold text-success">Actualizar FoodTruck</p>
+    </a>
+    <a [routerLink]="direccionDel" routerLinkActive="active" *ngIf="miFoodTruck">
+        <p class="text-center font-weight-bold text-success">Borrar FoodTruck</p>
+    </a>
 </div>

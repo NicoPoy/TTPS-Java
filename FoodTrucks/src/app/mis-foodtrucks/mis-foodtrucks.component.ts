@@ -15,7 +15,7 @@ export class MisFoodtrucksComponent implements OnInit {
 
   constructor(private api:ApiService, private router:Router) { 
     if( localStorage.getItem("token") == null || localStorage.getItem("token") == "null" ){
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     }
     this.miId = +localStorage.getItem("userID");
     this.misFt = api.FoodTrucksDeUsuario(this.miId);
