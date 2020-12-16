@@ -20,13 +20,10 @@ public class TipoDeServicioDAOImpl extends GenericDAOImpl<TipoDeServicio> implem
 
 	@Override
 	public List<TipoDeServicio> traerTodos() {
-		EntityManagerFactory emf = new EMFactory().getEMF();
-		EntityManager em = emf.createEntityManager();
-		
 		String sql = " SELECT ts "
 				   + " FROM TipoDeServicio ts";
 		 
-		Query consulta = EMFactory.getEMF().createEntityManager().createQuery(sql);	 
+		Query consulta = getEntityManager().createQuery(sql);	 
 		List<TipoDeServicio> resultado = consulta.getResultList();	 
 		return resultado;
 	}
