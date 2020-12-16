@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 import { ApiService } from 'src/app/servicios/api.service';
+import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
 
 @Component({
   selector: 'app-foodtruck-full',
@@ -10,21 +11,30 @@ import { ApiService } from 'src/app/servicios/api.service';
 })
 export class FoodtruckFullComponent implements OnInit {
 
-  idFoodTruck: number;
+  idFoodTruck: string;
   ft: Foodtruck;
   servicios: string;
   miFoodTruck: boolean;
-  idUsuario: number;
+  idUsuario: string;
   direccionAct: string;
   direccionDel: string;
-
+  
+  arrayServicios: Array<TipoDeServicio> = [];
+  
   constructor(private route: ActivatedRoute, private api:ApiService) { }
 
   ngOnInit(): void {
-    this.idFoodTruck = +this.route.snapshot.paramMap.get("id");
-    this.ft = this.api.getFoodTruck(this.idFoodTruck);
-    this.servicios = this.ft.servicios.join(", ") + ".";
-    this.idUsuario = +localStorage.getItem("userID");
+    this.idFoodTruck = this.route.snapshot.paramMap.get("id");
+    
+    this.api.getFoodTruck(this.idFoodTruck).subscribe(data => {
+      this.ft = data; 
+      for (let tipo of this.ft.tipos) {
+        this.arrayServicios.push(tipo.nombre);
+      }    
+      this.servicios = this.arrayServicios.join(", ") + ".";
+    });
+
+    this.idUsuario = localStorage.getItem("userID");
     if(this.api.esMiFoodTruck(this.idFoodTruck,this.idUsuario)){
       this.miFoodTruck = true;
       this.direccionAct = "/actFoodtruck/" + this.ft.id;

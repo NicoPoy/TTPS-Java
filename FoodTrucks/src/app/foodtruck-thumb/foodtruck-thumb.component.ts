@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
+import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
 
 @Component({
   selector: 'app-foodtruck-thumb',
@@ -12,13 +13,19 @@ export class FoodtruckThumbComponent implements OnInit {
 
   direccion: string;
   servicios: string;
+  arrayServicios: Array<TipoDeServicio> = [];
 
   constructor() { 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.direccion = "/foodtruck/" + this.ft.id;
-    this.servicios = this.ft.servicios.join(", ") + ".";
+    
+    for (let tipo of this.ft.tipos) {
+      this.arrayServicios.push(tipo.nombre);
+    }
+    
+    this.servicios = this.arrayServicios.join(", ") + ".";
   }
 
 }

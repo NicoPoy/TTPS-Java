@@ -23,6 +23,7 @@ import ttps.spring.clasesDAO.ZonaDAO;
 import ttps.spring.model.FoodTrucker;
 import ttps.spring.model.Usuario;
 import ttps.spring.model.Zona;
+import ttps.spring.services.TokenServices;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -66,7 +67,7 @@ public class FoodTruckerController {
 		System.out.println("Obteniendo usuario con id " + id);
 		FoodTrucker user = fDAO.recuperar(id);
 		if ( user != null ) {
-			if ( !token.equals(user.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -80,7 +81,7 @@ public class FoodTruckerController {
 		FoodTrucker u = fDAO.recuperar(id);
 		
 		if (u != null) {
-			if ( !token.equals(u.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -112,7 +113,7 @@ public class FoodTruckerController {
 	public ResponseEntity<FoodTrucker> deleteFoodTrucker( @PathVariable("id") long id,  @RequestHeader String token ){
 		FoodTrucker f = fDAO.recuperar(id); 
 		if ( f != null) {
-			if ( !token.equals(f.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTrucker>(HttpStatus.UNAUTHORIZED); }
 			else { fDAO.borrar(id);

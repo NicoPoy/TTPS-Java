@@ -63,11 +63,25 @@ public class FoodTruckController {
 		
 	}
 	
+	@GetMapping("/buscar")
+	public ResponseEntity<FoodTruck> getFoodTruckPorID ( @RequestHeader String token, @RequestHeader String foodTruckID ){	
+		FoodTruck foodtruck = ftDAO.recuperar( Long.parseLong(foodTruckID) ); 
+		if (foodtruck != null) {
+			if (!TokenServices.validateToken(token)) {
+				System.out.println(" <-- Token Invalido --> ");
+				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
+			} else {
+				foodtruck.setTipos( tsDAO.encontrarTodosParaFoodtrucker( foodtruck.getId() ) );
+				return new ResponseEntity<FoodTruck>(foodtruck, HttpStatus.OK);
+			}
+		} else {return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND); }
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<List<FoodTruck>> getFoodTruckParaUsuario( @PathVariable("id") long id, @RequestHeader String token ){	
 		FoodTrucker foodtrucker = ftrDAO.recuperar(id);
 		if (foodtrucker != null) {
-			if (!token.equals(foodtrucker.getId() + "123456")) {
+			if (!TokenServices.validateToken(token)) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<List<FoodTruck>>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -99,10 +113,7 @@ public class FoodTruckController {
 				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
 			} else {
 				foodtruck.setFoodtrucker(foodtrucker);
-				System.out.print("<<< Se recibieron " + foodtruck.getTipos().size() + "tipos de serviciso >>>" );
-				
 				ListIterator it = foodtruck.getTipos().listIterator();
-				
 				List<TipoDeServicio> tipos = new ArrayList();
 				while (it.hasNext()) {
 					TipoDeServicio ts = (TipoDeServicio) it.next();
@@ -127,7 +138,7 @@ public class FoodTruckController {
 	public ResponseEntity<FoodTruck> updateFoodTruck(@PathVariable("id") long id, @RequestBody FoodTruck foodtruck, @RequestHeader String token) {
 		FoodTruck foodt = ftDAO.recuperar(id);
 		if (foodt != null) {
-			if (!token.equals(foodt.getFoodtrucker().getId() + "123456")) {
+			if (!TokenServices.validateToken(token)) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -178,7 +189,7 @@ public class FoodTruckController {
 	public ResponseEntity<FoodTruck> deleteFoodTruck(@PathVariable("id") long id, @RequestHeader String token) {
 		FoodTruck foodt = ftDAO.recuperar(id);
 		if (foodt != null) {
-			if (!token.equals(foodt.getFoodtrucker().getId() + "123456")) {
+			if (!TokenServices.validateToken(token)) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<FoodTruck>(HttpStatus.UNAUTHORIZED);
 			} else {

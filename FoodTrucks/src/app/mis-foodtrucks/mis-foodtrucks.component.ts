@@ -10,15 +10,18 @@ import { Router } from '@angular/router';
 })
 export class MisFoodtrucksComponent implements OnInit {
 
-  miId: number;
+  miId: string;
   misFt: Foodtruck[];
 
   constructor(private api:ApiService, private router:Router) { 
     if( localStorage.getItem("token") == null || localStorage.getItem("token") == "null" ){
       this.router.navigate(['/login']);
     }
-    this.miId = +localStorage.getItem("userID");
-    this.misFt = api.FoodTrucksDeUsuario(this.miId);
+    this.miId = localStorage.getItem("userID");
+    
+    api.FoodTrucksDeUsuario(this.miId).subscribe( data => {
+      this.misFt = data;
+    });
     
   }
 

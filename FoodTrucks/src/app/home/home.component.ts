@@ -12,8 +12,9 @@ export class HomeComponent implements OnInit {
   mejoresft: Foodtruck[];
 
   constructor(private api:ApiService) {
-    this.mejoresft = api.mejoresFoodTrucks();
-
+    this.api.mejoresFoodTrucks().subscribe( data => {
+      this.mejoresft = data;
+    })
   }
 
   ngOnInit(): void {

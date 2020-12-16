@@ -23,6 +23,7 @@ import ttps.spring.model.FoodTrucker;
 import ttps.spring.model.Organizador;
 import ttps.spring.model.Usuario;
 import ttps.spring.model.Zona;
+import ttps.spring.services.TokenServices;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -60,7 +61,7 @@ public class OrganizadorController {
 		System.out.println("Obteniendo usuario con id " + id);
 		Organizador user = oDAO.recuperar(id);
 		if ( user != null ) {
-			if ( !token.equals(user.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -73,7 +74,7 @@ public class OrganizadorController {
 	public ResponseEntity<Organizador> updateOrganizador( @PathVariable("id") long id, @RequestBody Organizador user, @RequestHeader String token ){
 		Organizador u = oDAO.recuperar(id);
 		if (u != null) {
-			if ( !token.equals(u.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED);
 			} else {
@@ -101,7 +102,7 @@ public class OrganizadorController {
 	public ResponseEntity<Organizador> deleteOrganizador( @PathVariable("id") long id, @RequestHeader String token ){
 		Organizador o = oDAO.recuperar(id);
 		if ( o != null) {
-			if ( !token.equals(o.getId()+"123456") ) {
+			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<Organizador>(HttpStatus.UNAUTHORIZED); }
 			else { oDAO.borrar(id);
