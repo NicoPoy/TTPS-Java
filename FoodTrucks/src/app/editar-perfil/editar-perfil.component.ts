@@ -36,13 +36,6 @@ export class EditarPerfilComponent implements OnInit {
       this.actUsuarioForm.setControl('apellido', new FormControl(this.u.apellido,[Validators.required, Validators.minLength(3)] ));
       this.actUsuarioForm.setControl('username', new FormControl(this.u.username,[Validators.required, Validators.minLength(3)] ));
       this.actUsuarioForm.setControl('password', new FormControl(this.u.password,[Validators.required, Validators.minLength(3)] ));
-
-      /* this.actUsuarioForm = new FormGroup({
-        nombre: new FormControl(this.u.nombre, [Validators.required, Validators.minLength(3)] ),
-        apellido: new FormControl(this.u.apellido, [Validators.required, Validators.minLength(3)] ),
-        username: new FormControl(this.u.username, [Validators.required, Validators.minLength(3)] ),
-        password: new FormControl(this.u.password, [Validators.required, Validators.minLength(3)] ),
-      }) */
     
     });   
 
@@ -50,7 +43,14 @@ export class EditarPerfilComponent implements OnInit {
 
   async editarUsuarioForm(form: Usuario){
     this.api.editarUsuario(form).subscribe( data => console.log(data) );
-    //this.router.navigate(['/home']);
+    await this.sleep(500);
+    this.router.navigate(['/home']);
+  }
+
+  sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
   }
 
 }
