@@ -49,8 +49,8 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   async editarUsuarioForm(form: Usuario){
-    this.api.editarUsuario(form, localStorage.getItem("userID"));
-    this.router.navigate(['/home']);
+    this.api.editarUsuario(form).subscribe( data => console.log(data) );
+    //this.router.navigate(['/home']);
   }
 
 }

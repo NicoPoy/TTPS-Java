@@ -80,6 +80,8 @@ public class FoodTruckerController {
 	public ResponseEntity<FoodTrucker> updateFoodTrucker( @PathVariable("id") long id, @RequestBody FoodTrucker user, @RequestHeader String token ){
 		FoodTrucker u = fDAO.recuperar(id);
 		
+		System.out.println("LLEGO A LA API DE EDITAR");
+		
 		if (u != null) {
 			if ( !TokenServices.validateToken(token) ) {
 				System.out.println(" <-- Token Invalido --> ");

@@ -3,14 +3,13 @@ export class Usuario {
     public apellido: string;
     public username: string;
     public password: string;
-    public tipocuenta: string;
+    //public tipocuenta: string;
 
-    constructor (nombre: string, apellido: string, username: string, password: string, tipocuenta: string){
+    constructor (nombre: string, apellido: string, username: string, password: string){
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
         this.password = password;
-        this.tipocuenta = tipocuenta;
     }
     
 }

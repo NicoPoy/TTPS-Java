@@ -8,6 +8,8 @@ import { LoginComponent } from '../login/login.component';
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 import { Subject } from 'rxjs';
 import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
+import { collectExternalReferences } from '@angular/compiler';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Injectable({
   providedIn: 'root'
@@ -64,12 +66,12 @@ export class ApiService {
     }
     else{
       return this.http.get<any>(`${env.url}ttps-spring/organizadores/`+idu,  { headers: { 'token':localStorage.getItem("token")} } )    
-    }
-    
+    }  
   }
 
-  editarUsuario(u: Usuario, idu: string){
-     this.http.put(`${env.url}ttps-spring/foodtruckers/`+idu, u,  { headers: { 'token':localStorage.getItem("token")} } )
+  editarUsuario(u: Usuario):Observable<Usuario>{
+     console.log(u);
+     return this.http.put<Usuario>(`${env.url}ttps-spring/foodtruckers/`+localStorage.getItem("userID"), u, { headers: { 'token': localStorage.getItem("token") } });
   }
 
 }
