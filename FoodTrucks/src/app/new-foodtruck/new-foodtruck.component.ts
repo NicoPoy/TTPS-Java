@@ -28,14 +28,16 @@ export class NewFoodtruckComponent implements OnInit {
     if( localStorage.getItem("token") == null || localStorage.getItem("token") == "null" ){
       this.router.navigate(['/login']);
     }
-  }
 
-  ngOnInit(): void {
     this.api.getTiposDeServicio().subscribe(data => {
       this.listaServicios = data;
       console.log( this.listaServicios );
       this.listaServicios.map( elem =>  this.nuevoFoodtruckForm.addControl(elem.nombre, new FormControl('')) );
     });
+    
+  }
+
+  ngOnInit(): void {
   }
 
   async postFoodtruckForm( form: Foodtruck ){

@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
 import { collectExternalReferences } from '@angular/compiler';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { Zona } from '../modelos/zona/zona';
 
 @Injectable({
   providedIn: 'root'
@@ -81,4 +82,9 @@ export class ApiService {
   borrarFoodtruck(idft: string):Observable<Foodtruck>{
     return this.http.delete<Foodtruck>(`${env.url}ttps-spring/foodtrucks/`+idft, { headers: { 'token': localStorage.getItem("token") } } );
   }
+
+  getZonas():Observable<Zona[]> {
+    return this.http.get<Zona[]>(`${env.url}ttps-spring/zonas`)
+  }
+  
 }

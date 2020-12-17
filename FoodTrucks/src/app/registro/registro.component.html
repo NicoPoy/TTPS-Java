@@ -5,11 +5,19 @@
     <p> Username: <input type='text' name='username' formControlName="username"> </p> 
     <p> Password: <input type='password' name='password' formControlName="password"> </p>	
         
-    <p>Tipo de cuenta:</p>
+    <div>Tipo de cuenta:</div>
     <input type="radio" id="radiofoodtrucker" name="tipocuenta" value="foodtrucker" formControlName="tipocuenta">
     <label for="radiofoodtrucker">FoodTrucker</label><br>
     <input type="radio" id="radioorganizador" name="tipocuenta" value="organizador" formControlName="tipocuenta">
     <label for="radioorganizador">Organizador</label><br>
+    
+    <div *ngIf="nuevoForm.controls['tipocuenta'].value == 'foodtrucker'" >
+        <div>Zona:</div>    
+        <div *ngFor="let z of zonas">
+            <input type="radio" id={{z.nombre}} name="zona" value={{z.id}} formControlName="zona" >
+            <label for="zona"> {{z.nombre}} </label><br>
+        </div>
+    </div>
 
     <input type='submit' value='Crear'> 
 </form>

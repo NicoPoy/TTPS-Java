@@ -6,6 +6,7 @@ import ttps.spring.model.*;
 public interface ZonaDAO extends GenericDAO<Zona> {
 
 	public Zona buscarPorNombre(String nombre);
+	public List<Zona> traerTodas();
 	/*public List<FoodTrucker> devolverFoodTruckers();*/
 	
 }

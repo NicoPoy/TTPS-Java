@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/servicios/api.service'
 import { AuthenticationService } from 'src/app/servicios/authentication.service'
 import { Router } from '@angular/router';
 import { ResponseI } from 'src/app/modelos/response/response-i'
+import { Zona } from '../modelos/zona/zona';
 
 @Component({
   selector: 'app-registro',
@@ -13,6 +14,7 @@ import { ResponseI } from 'src/app/modelos/response/response-i'
 })
 
 export class RegistroComponent implements OnInit {
+  zonas: Zona[];
 
   delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -21,8 +23,8 @@ export class RegistroComponent implements OnInit {
     apellido: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     username: new FormControl('', [Validators.required, Validators.minLength(3)] ),
     password: new FormControl('', [Validators.required, Validators.minLength(3)] ),
-    tipocuenta: new FormControl(''),
-    zona: new FormControl ('1')
+    tipocuenta: new FormControl('', [Validators.required] ),
+    zona: new FormControl(''),
   })
 
   constructor( private api:ApiService, private auth: AuthenticationService, private router:Router ) { }
@@ -31,11 +33,21 @@ export class RegistroComponent implements OnInit {
     if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
       this.router.navigate(['/home']);
     }
+
+    this.api.getZonas().subscribe( data => {
+      this.zonas = data;
+      //this.zonas.map( elem =>  this.nuevoForm.addControl(elem.nombre, new FormControl('')) );
+    });
+
    }
 
   async postForm( form:Usuario ){
+
+    form.zona = new Zona(this.nuevoForm.controls['zona'].value, null)
     this.api.crearUsuario(form).subscribe(data => console.log(data) );
-    await this.sleep(200);
+
+    //Logeo Automatico
+    await this.sleep(800);
     console.log( "Se registro el usuario correctamente");
     this.auth.login(form).subscribe(data => {
       let dataResponse: ResponseI = data;

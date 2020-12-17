@@ -1,5 +1,7 @@
 package ttps.spring.clasesDAOImpl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -29,6 +31,16 @@ public class ZonaDAOImpl extends GenericDAOImpl<Zona> implements ZonaDAO{
 		 consulta.setParameter("nombre", nombre);
 		 Zona resultado = (Zona)consulta.getSingleResult();
 		 return resultado;
+	}
+
+	@Override
+	public List<Zona> traerTodas() {
+		String sql = " SELECT z "
+				   + " FROM Zona z";
+		 
+		Query consulta = getEntityManager().createQuery(sql);	 
+		List<Zona> resultado = consulta.getResultList();	 
+		return resultado;
 	}
 
 }
