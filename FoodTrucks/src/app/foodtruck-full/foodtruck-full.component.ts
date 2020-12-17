@@ -32,6 +32,9 @@ export class FoodtruckFullComponent implements OnInit {
         this.arrayServicios.push(tipo.nombre);
       }    
       this.servicios = this.arrayServicios.join(", ") + ".";
+      this.direccionAct = "/actFoodtruck/" + this.ft.id;
+      this.direccionDel = "/delFoodtruck/" + this.ft.id;
+      console.log(this.direccionAct);
     });
 
     this.idUsuario = localStorage.getItem("userID");
@@ -40,8 +43,6 @@ export class FoodtruckFullComponent implements OnInit {
         if (data.status == "ok") {
           console.log("LLEGO UN OK");
           this.miFoodTruck = true;
-          this.direccionAct = "/actFoodtruck/" + this.ft.id;
-          this.direccionDel = "/delFoodtruck/" + this.ft.id;
         } else{
           this.miFoodTruck = false;
         }
