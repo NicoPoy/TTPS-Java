@@ -51,6 +51,7 @@ export class EditarPerfilComponent implements OnInit {
     return new Promise((resolve) => {
       setTimeout(resolve, ms);
     });
+
   }
 
 }
