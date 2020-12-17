@@ -34,7 +34,6 @@ export class FoodtruckFullComponent implements OnInit {
       this.servicios = this.arrayServicios.join(", ") + ".";
       this.direccionAct = "/actFoodtruck/" + this.ft.id;
       this.direccionDel = "/delFoodtruck/" + this.ft.id;
-      console.log(this.direccionAct);
     });
 
     this.idUsuario = localStorage.getItem("userID");

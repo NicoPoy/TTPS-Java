@@ -220,7 +220,7 @@ public class FoodTruckController {
 				if( foodtruck.getFoodtrucker().getId() == Long.parseLong(usuarioID) ) {
 					 return ResponseEntity.ok(new Credentials(token, 0, "ok", null, usuarioID));
 				} else {
-					return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No coinciden");
+					return ResponseEntity.ok(new Credentials(token, 0, "false", null, usuarioID));
 				}
 			}
 		} else { return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No existe el foodtruck"); }

@@ -1,1 +1,9 @@
-<p>del-foodtruck works!</p>
+<h2 class="font-weight-bold "> Eliminar FoodTruck </h2>
+
+<p class="font-weight-bold ">¿Está seguro de que desea eliminar el siguiente foodTruck?</p>
+    
+<div class="row">
+    <app-foodtruck-thumb [ft]="mift"></app-foodtruck-thumb>
+</div>
+
+<button (click)="borrarFoodtruck(mift.id)">Confirmar Eliminación</button>
