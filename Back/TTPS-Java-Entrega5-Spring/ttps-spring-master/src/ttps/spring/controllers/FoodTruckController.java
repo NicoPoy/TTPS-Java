@@ -57,7 +57,6 @@ public class FoodTruckController {
 				ft.setTipos( tsDAO.encontrarTodosParaFoodtrucker( ft.getId() ) );
 				resultadoFoodTrucks.add(ft);
 			}		
-			System.out.println("< Se encontraron " +resultadoFoodTrucks.size() + " >");
 			return new ResponseEntity<List<FoodTruck>>(resultadoFoodTrucks, HttpStatus.OK);
 		}
 		
@@ -85,7 +84,6 @@ public class FoodTruckController {
 				System.out.println(" <-- Token Invalido --> ");
 				return new ResponseEntity<List<FoodTruck>>(HttpStatus.UNAUTHORIZED);
 			} else {
-				System.out.println("<<-- Buscando FoodTrucks para el usuario " + foodtrucker.getUsername() + " -->>");
 				List<FoodTruck> foodTrucks = ftDAO.encontrarTodosParaUsuarioID(foodtrucker.getId());				
 				ListIterator it = foodTrucks.listIterator();
 				List<FoodTruck> resultadoFoodTrucks = new ArrayList();
@@ -94,7 +92,6 @@ public class FoodTruckController {
 					ft.setTipos( tsDAO.encontrarTodosParaFoodtrucker( ft.getId() ) );
 					resultadoFoodTrucks.add(ft);
 				}		
-				System.out.println("< Se encontraron " +resultadoFoodTrucks.size() + " >");
 				return new ResponseEntity<List<FoodTruck>>(resultadoFoodTrucks, HttpStatus.OK);
 			}
 		} else {  System.out.println("!!-- No se encontro el usuario con id " + id + " --!!");
@@ -136,6 +133,7 @@ public class FoodTruckController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<FoodTruck> updateFoodTruck(@PathVariable("id") long id, @RequestBody FoodTruck foodtruck, @RequestHeader String token) {
+		System.out.println("LLEGO A LA API");
 		FoodTruck foodt = ftDAO.recuperar(id);
 		if (foodt != null) {
 			if (!TokenServices.validateToken(token)) {

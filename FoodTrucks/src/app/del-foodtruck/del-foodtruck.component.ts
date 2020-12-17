@@ -43,8 +43,17 @@ export class DelFoodtruckComponent implements OnInit {
     
   }
 
-  borrarFoodtruck(id: string){
-    this.api.borrarFoodtruck(id);
+  async borrarFoodtruck(id: string){
+    this.api.borrarFoodtruck(id).subscribe( data => console.log(data) );
+    await this.sleep(500);
     this.router.navigate(['/misFoodtrucks']);
   }
+
+  sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+
+  }
+
 }

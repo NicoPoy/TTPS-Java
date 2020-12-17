@@ -78,6 +78,7 @@ export class ApiService {
     return this.http.put<Foodtruck>(`${env.url}ttps-spring/foodtrucks/`+id, ft, { headers: { 'token': localStorage.getItem("token") } });
   }
 
-  borrarFoodtruck(idft: string){
+  borrarFoodtruck(idft: string):Observable<Foodtruck>{
+    return this.http.delete<Foodtruck>(`${env.url}ttps-spring/foodtrucks/`+idft, { headers: { 'token': localStorage.getItem("token") } } );
   }
 }

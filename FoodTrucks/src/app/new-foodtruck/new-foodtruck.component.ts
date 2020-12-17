@@ -52,7 +52,7 @@ export class NewFoodtruckComponent implements OnInit {
     
     this.api.crearFoodTruck(ft).subscribe( data => console.log(data) );
     
-    await this.sleep(200);
+    await this.sleep(500);
     this.router.navigate(['/misFoodtrucks']);
 
   }
