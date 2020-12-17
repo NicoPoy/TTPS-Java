@@ -17,7 +17,7 @@ export class DelFoodtruckComponent implements OnInit {
   mift: Foodtruck;
   esmift: boolean;
 
-  constructor(private route: ActivatedRoute, private api:ApiService, private router: Router,) {
+  constructor(private route: ActivatedRoute, private api:ApiService, private router: Router) {
     this.idFoodTruck = this.route.snapshot.paramMap.get("id");
     this.api.getFoodTruck(this.idFoodTruck).subscribe( data => {
       this.mift = data;

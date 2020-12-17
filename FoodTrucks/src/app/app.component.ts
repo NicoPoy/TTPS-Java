@@ -30,6 +30,9 @@ export class AppComponent implements OnInit {
     this.ngOnInit();
     this.router.navigate(['/login']);
   }
+  onOutletLoaded(component) {
+    this.actualizar();
+} 
 
   actualizar(){
     if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
