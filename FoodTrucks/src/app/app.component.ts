@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'FoodTrucks';
   estaLogueado;
   esFoodTrucker;
+  username;
 
   public currentUser: Usuario;
 
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
   actualizar(){
     if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
       this.estaLogueado = true;
+      this.username = localStorage.getItem('user');
 
       if( localStorage.getItem("userType") == "foodtrucker" ){
         this.esFoodTrucker = true

@@ -36,6 +36,7 @@ export class AuthenticationService {
         localStorage.setItem("status", "ok");
         localStorage.setItem("userID", null);
         localStorage.setItem("userType", "publico");
+        localStorage.setItem("user", null);
     }
 
 }
