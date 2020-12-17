@@ -55,8 +55,8 @@ export class ApiService {
     return this.http.get<Foodtruck[]>(`${env.url}ttps-spring/foodtrucks/`+id, { headers: { 'token':localStorage.getItem("token")} } )
   }
 
-  esMiFoodTruck(idFt: string, idUs: string){ //todavia no anda, tiene datos de prueba.
-    return true;
+  esMiFoodTruck(idFt: string, idUs: string):Observable<ResponseI> {   
+    return this.http.get<ResponseI>(`${env.url}ttps-spring/foodtrucks/validar`, { headers: { 'token':localStorage.getItem("token"), 'foodTruckID':idFt, 'usuarioID':idUs }} )
   }
 
   getUsuario(idu: string):Observable<Usuario> {

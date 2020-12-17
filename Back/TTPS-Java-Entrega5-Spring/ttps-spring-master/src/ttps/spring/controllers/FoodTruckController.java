@@ -208,6 +208,26 @@ public class FoodTruckController {
 			return new ResponseEntity<FoodTruck>(HttpStatus.NOT_FOUND);
 		}
 	}
+		
+	@GetMapping("/validar")
+	public ResponseEntity<?> validarFoodTruckParaUsuario ( @RequestHeader String token, @RequestHeader String usuarioID, @RequestHeader String foodTruckID ){	
+		FoodTruck foodtruck = ftDAO.recuperar( Long.parseLong(foodTruckID) );
+		if (foodtruck != null) {
+			if (!TokenServices.validateToken(token)) {
+				System.out.println(" <-- Token Invalido --> ");
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token incorrecto");
+			} else {
+				if( foodtruck.getFoodtrucker().getId() == Long.parseLong(usuarioID) ) {
+					 return ResponseEntity.ok(new Credentials(token, 0, "ok", null, usuarioID));
+				} else {
+					return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No coinciden");
+				}
+			}
+		} else { return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No existe el foodtruck"); }
+	}
+	
+	
+	
 
 	/*
 	 * @DeleteMapping public ResponseEntity<FoodTruck> deleteAllFoodTrucks(){ List
