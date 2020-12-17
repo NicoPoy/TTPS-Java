@@ -70,7 +70,6 @@ export class ApiService {
   }
 
   editarUsuario(u: Usuario):Observable<Usuario>{
-     console.log(u);
      return this.http.put<Usuario>(`${env.url}ttps-spring/foodtruckers/`+localStorage.getItem("userID"), u, { headers: { 'token': localStorage.getItem("token") } });
   }
 
