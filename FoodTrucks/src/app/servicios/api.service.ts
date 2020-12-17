@@ -72,9 +72,12 @@ export class ApiService {
   editarUsuario(u: Usuario):Observable<Usuario>{
      return this.http.put<Usuario>(`${env.url}ttps-spring/foodtruckers/`+localStorage.getItem("userID"), u, { headers: { 'token': localStorage.getItem("token") } });
   }
-
-  borrarFoodtruck(idft: string){
-
+  
+  editarFoodTruck( ft: Foodtruck, id: string ):Observable<Foodtruck>{
+    console.log(id);
+    return this.http.put<Foodtruck>(`${env.url}ttps-spring/foodtrucks/`+id, ft, { headers: { 'token': localStorage.getItem("token") } });
   }
 
+  borrarFoodtruck(idft: string){
+  }
 }
