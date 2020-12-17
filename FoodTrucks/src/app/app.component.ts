@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   }
   onOutletLoaded(component) {
     this.actualizar();
-} 
+  } 
 
   actualizar(){
     if( localStorage.getItem("token") != null && localStorage.getItem("token") != "null" ){
