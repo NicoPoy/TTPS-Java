@@ -1,5 +1,5 @@
-<div class="bg-danger border border-dark rounded p-1 m-1 ">
-    <h3 class="text-center font-weight-bold text-primary">{{ ft.nombre }}</h3>
+<div class="border border-dark rounded p-1 m-1 ">
+    <h3 class="text-center font-weight-bold ">{{ ft.nombre }}</h3>
     <h5 class="text-center">{{ ft.descripcion }}</h5>
     <p class="text-center">Tipos de servicio: {{ servicios }}</p>
     <p class="text-center">Instagram: {{ ft.instagram }}</p>
@@ -7,9 +7,9 @@
     <p class="text-center">Whatsapp: {{ ft.whatsapp }}</p>
     <p class="text-center">Sitio Web: {{ ft.url }}</p>
     <a [routerLink]="direccionAct" routerLinkActive="active" *ngIf="miFoodTruck">
-        <p class="text-center font-weight-bold text-success">Actualizar FoodTruck</p>
+        <p class="text-center font-weight-bold">Actualizar FoodTruck</p>
     </a>
     <a [routerLink]="direccionDel" routerLinkActive="active" *ngIf="miFoodTruck">
-        <p class="text-center font-weight-bold text-success">Borrar FoodTruck</p>
+        <p class="text-center font-weight-bold">Borrar FoodTruck</p>
     </a>
 </div>
