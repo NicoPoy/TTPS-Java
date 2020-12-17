@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { elementAt } from 'rxjs/operators';
 import { Foodtruck } from '../modelos/foodtruck/foodtruck.model';
 import { TipoDeServicio } from '../modelos/tipoDeServicio/tipo-de-servicio';
 import { ApiService } from '../servicios/api.service';
@@ -13,6 +12,7 @@ import { ApiService } from '../servicios/api.service';
 })
 export class ActFoodtruckComponent implements OnInit {
 
+  idFoodTruck: string;
   listaServicios: TipoDeServicio[];
   foodTruck: Foodtruck;
   
@@ -36,9 +36,9 @@ export class ActFoodtruckComponent implements OnInit {
       this.router.navigate(['/login']); }
 
     this.actRoute.paramMap.subscribe(params => {
-      let idFoodTruck = params.get('id');
+      this.idFoodTruck = params.get('id');
 
-      this.api.getFoodTruck(idFoodTruck).subscribe(data => {
+      this.api.getFoodTruck(this.idFoodTruck).subscribe(data => {
       
       this.foodTruck = data;
 
@@ -63,7 +63,28 @@ export class ActFoodtruckComponent implements OnInit {
   
   }
 
-  editarFoodtruckPut( form: Foodtruck ){
-    console.log("entro al metodo")
+  async editarFoodtruckPut( form: Foodtruck ){
+
+    let selectServicios: Array<TipoDeServicio> = [];
+
+    this.listaServicios.map( elem => {
+      if ( this.editarFoodtruckForm.controls[elem.nombre].value ) {
+        selectServicios.push(elem);
+      };
+    });
+
+    let ft = new Foodtruck (null,form.nombre, form.descripcion, form.instagram, form.twitter, form.whatsapp, form.url, selectServicios);
+    this.api.editarFoodTruck(ft, this.idFoodTruck).subscribe( data => { console.log(data) })
+
+    await this.sleep(500);
+    this.router.navigate(['/foodtruck/'+this.idFoodTruck]);
+
   }
+
+  sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
 }
