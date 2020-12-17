@@ -1,6 +1,15 @@
 <h1>Iniciar Sesion</h1>
-<form [formGroup] = "loginForm" (ngSubmit)="postForm(loginForm.value)">    
-    <input type='text' name='username' placeholder='Nombre de usuario' formControlName='username' />
-    <input type='password' name='password' placeholder='Contraseña' formControlName='password'/>   
-    <input type='submit' value='Ingresar'/>
-</form>
+
+<form [formGroup] = "loginForm" (ngSubmit)="postForm(loginForm.value)">  
+  
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type='text' name='username' placeholder='Nombre de usuario' formControlName='username' />
+  
+      <label for="psw"><b>Password</b></label>
+      <input type='password' name='password' placeholder='Contraseña' formControlName='password'/> 
+
+      <button type="submit">Login</button>
+    </div>
+  
+  </form>
