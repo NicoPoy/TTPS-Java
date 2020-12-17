@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DelFoodtruckComponent implements OnInit {
 
+  nombreFT: string;
   idFoodTruck: string;
   mift: Foodtruck;
   esmift: boolean;
@@ -20,11 +21,11 @@ export class DelFoodtruckComponent implements OnInit {
     this.idFoodTruck = this.route.snapshot.paramMap.get("id");
     this.api.getFoodTruck(this.idFoodTruck).subscribe( data => {
       this.mift = data;
+      this.nombreFT = data.nombre
     })
   }
 
   ngOnInit(): void {
-
     this.api.esMiFoodTruck(this.idFoodTruck,localStorage.getItem("userID")).subscribe( data => { 
       if (data.status == "ok") {
         //console.log("ES MIO");
