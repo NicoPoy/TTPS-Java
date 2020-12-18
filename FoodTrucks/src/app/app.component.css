@@ -1,0 +1,7 @@
+.fondo1{
+    height: 1441px;
+    background: url(../assets/images/fondo1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
