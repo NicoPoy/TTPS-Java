@@ -55,6 +55,7 @@ export class RegistroComponent implements OnInit {
         localStorage.setItem("status", dataResponse.status);
         localStorage.setItem("userType", dataResponse.type);
         localStorage.setItem("userID", dataResponse.userID);
+        localStorage.setItem("user", form.username);
         this.router.navigate(['/home']);
     });
 

@@ -42,7 +42,11 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   async editarUsuarioForm(form: Usuario){
-    this.api.editarUsuario(form).subscribe( data => console.log(data) );
+    this.api.editarUsuario(form).subscribe( data => { 
+      console.log(data)
+      localStorage.setItem("user", data.username);
+    });
+    
     await this.sleep(500);
     this.router.navigate(['/home']);
   }
