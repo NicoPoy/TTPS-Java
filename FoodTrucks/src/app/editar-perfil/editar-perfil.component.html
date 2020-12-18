@@ -1,10 +1,26 @@
 <h1>Editar Perfil</h1>
-<form [formGroup] = "actUsuarioForm" (ngSubmit)="editarUsuarioForm(actUsuarioForm.value)"> 
 
-    <p> Nombre: <input type='text' name='nombre' formControlName="nombre"> </p> 
-    <p> Apellido: <input type='text' name='apellido' formControlName="apellido"> </p> 
-    <p> Username: <input type='text' name='username' formControlName="username"> </p> 
-    <p> Password: <input type='password' name='password' formControlName="password"> </p>	
-    
-    <input type='submit' value='Actualizar'> 
-</form>
+<div class="formulario_div">
+
+    <form [formGroup] = "actUsuarioForm" (ngSubmit)="editarUsuarioForm(actUsuarioForm.value)"> 
+
+        <br>
+        <div><p class="h6"> Nombre </p> </div>
+        <div> <input type='text' name='nombre' class="form-control"  formControlName="nombre"> </div>
+       
+        <div><p class="h6"> Apellido </p> </div>
+        <div> <input type='text' name='apellido' class="form-control" formControlName="apellido"> </div>
+
+        <div><p class="h6"> Username </p> </div>
+        <div> <input type='text' name='username' class="form-control" formControlName="username"> </div> 
+
+        <div><p class="h6"> Password </p> </div>
+        <div> <input type='password' name='password' class="form-control" formControlName="password"> </div>
+        
+        <br>
+        <input class='btn btn-dark' type='submit' value='Actualizar'> 
+        <br> <br>
+
+    </form>
+
+</div>

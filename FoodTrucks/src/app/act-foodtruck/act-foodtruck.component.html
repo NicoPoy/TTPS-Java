@@ -1,30 +1,44 @@
-<h1>Agregar FoodTruck</h1>
+<h1 class="font-weight-bold"> Editar FoodTruck</h1>
 
-<form [formGroup] = "editarFoodtruckForm" (ngSubmit)="editarFoodtruckPut(editarFoodtruckForm.value)">
+<div class="formulario_div">
+    <br>
+    <form [formGroup] = "editarFoodtruckForm" (ngSubmit)="editarFoodtruckPut(editarFoodtruckForm.value)">
 
-    <div> Nombre: </div>
-    <div><input type='text' name='nombre' formControlName="nombre"> </div> 
-    
-    <div> Pagina Web: </div> 
-    <div> <input type='text' name='url' formControlName="url"> </div>
+        <div><p class="h6"> Nombre </p> </div>
+        <div><input class="form-control" type='text' name='nombre' formControlName="nombre"> </div> 
+        <br>
 
-    <div> WhatsApp: </div> 
-    <div> <input type='number' name='whatsapp' formControlName="whatsapp"> </div>	
- 
-    <div> Twitter: </div> 
-    <div> <input type='text' name='twitter' formControlName="twitter"> </div>	
+        <div> <p class="h6"> Pagina web </p> </div>
+        <div> <input class="form-control" type='text' name='url' formControlName="url"> </div>
+        <br>
 
-    <div> Instagram: </div> 
-    <div> <input type='text' name='instagram' formControlName="instagram"> </div>
-    
-    <div> Descripcion: </div> 
-    <div> <textarea rows="4" cols="50" name="Descripcion" formControlName="descripcion" > </textarea> </div>   
+        <div> <p class="h6"> WhatsApp </p> </div>  
+        <div> <input class="form-control" type='number' name='whatsapp' formControlName="whatsapp"> </div>	
+        <br>
 
-    <div *ngFor="let servicio of listaServicios">
-        <input type="checkbox" id= {{servicio.nombre}} name= "tipoDeServicio" value= {{servicio.id}} [formControlName]="servicio.nombre" >
-        <label for="tipoDeServicio"> {{servicio.nombre}} </label><br>
-    </div>
+        <div> <p class="h6"> Twitter </p> </div>
+        <div> <input class="form-control" type='text' name='twitter' formControlName="twitter"> </div>	
+        <br>
 
-    <input type='submit' value='Modificar'>
+        <div> <p class="h6"> Instagram </p> </div> 
+        <div> <input class="form-control" type='text' name='instagram' formControlName="instagram"> </div>
+        <br>
 
-</form>
+        <div> <p class="h6"> Descripcion </p> </div>
+        <div> <textarea class="form-control" rows="4" cols="50" name="Descripcion" formControlName="descripcion" > </textarea> </div>   
+        <br>
+
+        <div> <p class="h6"> Servicios </p> </div>
+        <div *ngFor="let servicio of listaServicios">
+            <input type="checkbox" class="form-check-input" id= {{servicio.nombre}} name= "tipoDeServicio" value= {{servicio.id}} [formControlName]="servicio.nombre" >
+            <label for="tipoDeServicio" class="form-check-label" > {{servicio.nombre}} </label><br>
+        </div>
+        <br>
+
+        <input type='submit' class='btn btn-dark' value='Modificar'>
+        <br> 
+        <br>
+
+    </form>
+
+</div>

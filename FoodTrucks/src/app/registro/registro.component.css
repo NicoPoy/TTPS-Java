@@ -1,0 +1,17 @@
+.formulario_div {
+    background-color: #f3d654c2;
+    border: 1px solid #000000;
+    padding: 0 1rem;
+    margin: 1rem;
+}
+
+form { 
+    margin: 0 auto; 
+    width:250px; 
+} 
+
+h1{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 70px;
+    color: rgb(0, 0, 0);   
+}
